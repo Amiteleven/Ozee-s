@@ -427,12 +427,18 @@ export default function Home() {
           </nav>
 
           {/* Brand Logo */}
-          <a href="#" className="flex flex-col items-center group">
-            <div className="w-10 h-10 rounded-full border border-[#D4AF37] flex items-center justify-center font-serif text-xl font-bold text-[#1A1412] group-hover:bg-[#1A1412] group-hover:text-[#D4AF37] transition-all duration-300 shadow-sm">
-              O
+          <a href="#" className="flex items-center gap-3 group py-1">
+            <Image
+              src="/logo.png"
+              alt="Ozee's Logo"
+              width={52}
+              height={52}
+              className="w-12 h-12 object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
+            />
+            <div className="flex flex-col">
+              <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#1A1412] leading-none">OZEE&apos;S</span>
+              <span className="text-[8px] uppercase tracking-[0.3em] text-[#D4AF37] font-semibold mt-1">Crafted with Love • Made like Home</span>
             </div>
-            <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#1A1412] -mt-0.5">OZEE&apos;S</span>
-            <span className="text-[8px] uppercase tracking-[0.35em] text-[#D4AF37] font-semibold -mt-1">Pâtisserie & Artisanal Bakes</span>
           </a>
 
           <div className="flex items-center gap-4">
@@ -769,9 +775,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#D4AF37] flex items-center justify-center font-serif text-2xl font-bold mb-2 text-[#D4AF37]">
-              O
-            </div>
+            <Image
+              src="/logo.png"
+              alt="Ozee's Logo"
+              width={100}
+              height={100}
+              className="w-24 h-24 object-contain mb-3 drop-shadow-md"
+            />
             <span className="font-serif text-3xl font-bold tracking-[0.2em] text-[#FFFDF9]">OZEE&apos;S</span>
             <span className="text-[10px] uppercase tracking-[0.35em] text-[#D4AF37] font-semibold mt-1">Crafted with Love • Made Like Home</span>
           </div>
