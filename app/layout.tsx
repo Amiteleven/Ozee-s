@@ -15,6 +15,10 @@ const sansFont = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Ozee's | Crafted with Love, Made like Home",
   description: "At Ozee's, baking begins with purpose, passion, and purity. Inspired by the Trident in our logo - a symbol of strength, balance, and unwavering commitment.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
 };
 
 export default function RootLayout({
