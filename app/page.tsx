@@ -17,7 +17,7 @@ function DietaryBadge({ type }: { type: "veg" | "egg" | "both" }) {
     return (
       <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full text-[10px] text-emerald-800 font-medium">
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-        <span>Eggless</span>
+        <span>100% Eggless</span>
       </span>
     );
   }
@@ -36,6 +36,7 @@ interface Product {
   diet: "veg" | "egg" | "both";
   img: string;
   category: string;
+  flavors?: string[];
   tag?: string;
 }
 
@@ -51,263 +52,230 @@ export default function Home() {
   };
 
   const catalog: Product[] = [
-    // CUPCAKES
+    // 1. CUPCAKES
     {
       id: "cup-1",
-      name: "Strawberry Chocolate Cupcakes",
-      desc: "Moist dark chocolate sponge topped with velvety chocolate buttercream swirls and fresh whole strawberries.",
+      name: "Berry Crown Cupcakes",
+      desc: "Fluffy sponge cupcakes topped with rich whipped icing, fresh berries, and seasonal fruits.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg",
       category: "Cupcakes",
+      flavors: ["Strawberry", "Blueberry", "Seasonal Fruits"],
       tag: "Bestseller"
     },
     {
       id: "cup-2",
-      name: "Strawberry Choc Close-Up",
-      desc: "Rich chocolate cupcake finished with silky chocolate piping and fresh seasonal strawberry.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (24).jpeg",
-      category: "Cupcakes"
-    },
-    {
-      id: "cup-3",
-      name: "Vanilla Whisper Cupcake",
-      desc: "Golden vanilla bean cake crowned with delicate whipped frosting and rainbow sugar pearls.",
+      name: "Swirl Collection",
+      desc: "Our signature trio of luxury piped cupcakes in rich dark chocolate, vanilla snowdrop, and red velvet.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (2).jpeg",
-      category: "Cupcakes"
-    },
-    {
-      id: "cup-4",
-      name: "Strawberry Bloom Cupcake",
-      desc: "Fluffy vanilla sponge topped with strawberry cream piping and fresh berries.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-22 at 10.52.01 AM (1).jpeg",
-      category: "Cupcakes"
-    },
-    {
-      id: "cup-5",
-      name: "Crimson Velvet Cupcake",
-      desc: "Authentic red velvet cake finished with rich cream cheese frosting swirl.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-22 at 10.55.42 AM (4).jpeg",
-      category: "Cupcakes"
+      category: "Cupcakes",
+      flavors: ["Midnight Swirl (Rich Chocolate)", "Sweet Snowdrop (Vanilla)", "Vibrant Ruby (Red Velvet)"]
     },
 
-    // TARTS & DESSERTS
+    // 2. TEACAKES
     {
-      id: "tart-1",
-      name: "Fresh Strawberry Tart",
-      desc: "Crisp butter pastry shell filled with silky crème pâtissière and arranged with fresh strawberry fans.",
+      id: "tea-1",
+      name: "Midnight Loaf",
+      desc: "Decadent dark chocolate loaf cake decorated with delicate white edible flower accents and candied citrus peel.",
       diet: "egg",
-      img: "/WhatsApp Image 2026-07-22 at 10.52.01 AM.jpeg",
-      category: "Tarts & Desserts",
-      tag: "Seasonal"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (13).jpeg",
+      category: "Teacakes"
     },
     {
-      id: "tart-2",
-      name: "Fresh Fruit Tart",
-      desc: "Butter tart shell loaded with seasonal berries and tropical fruits with a apricot glaze finish.",
+      id: "tea-2",
+      name: "Hazelnut Heaven",
+      desc: "Rich cocoa loaf bar coated in a silky milk chocolate glaze and topped with roasted whole hazelnuts.",
+      diet: "both",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg",
+      category: "Teacakes",
+      tag: "Chef's Special"
+    },
+    {
+      id: "tea-3",
+      name: "Midnight Drip",
+      desc: "Moist chocolate tea loaf cake finished with a glossy chocolate drip glaze and dried berry bits.",
+      diet: "both",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (15).jpeg",
+      category: "Teacakes"
+    },
+    {
+      id: "tea-4",
+      name: "Golden Crumble (Coco Banana)",
+      desc: "Warm banana bread studded with dark chocolate chunks and topped with golden butter crumble.",
+      diet: "both",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (16).jpeg",
+      category: "Teacakes"
+    },
+    {
+      id: "tea-5",
+      name: "Marble Loaf",
+      desc: "Classic swirled vanilla bean and rich dark chocolate marble cake baked into a golden loaf.",
+      diet: "both",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (17).jpeg",
+      category: "Teacakes"
+    },
+    {
+      id: "tea-6",
+      name: "Cloud Roll (Swiss Roll)",
+      desc: "Ultra-soft, pillowy sponge cake roll swirled with light cream filling in five signature flavors.",
       diet: "egg",
-      img: "/WhatsApp Image 2026-07-22 at 10.52.01 AM (2).jpeg",
-      category: "Tarts & Desserts"
-    },
-    {
-      id: "tart-3",
-      name: "Rose & Lychee Tart",
-      desc: "Aromatic pastry shell with fresh lychee halves decorated with edible organic rose petals.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (4).jpeg",
-      category: "Tarts & Desserts"
-    },
-    {
-      id: "tart-4",
-      name: "Lotus Biscoff Tart",
-      desc: "Signature Biscoff cookie crust filled with smooth Biscoff cream spread and crunchy cookie crumble.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (5).jpeg",
-      category: "Tarts & Desserts",
-      tag: "Signature"
-    },
-    {
-      id: "tart-5",
-      name: "Cream Dessert Cup",
-      desc: "Indulgent individual glass cup layer with berry compote, whipped cream, and biscuit crumble.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (3).jpeg",
-      category: "Tarts & Desserts"
-    },
-    {
-      id: "tart-6",
-      name: "Orange Blossom Yogurt Cake",
-      desc: "Light yogurt cake infused with citrus blossom essence and garnished with candied orange slices.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (1).jpeg",
-      category: "Tarts & Desserts"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (12).jpeg",
+      category: "Teacakes",
+      flavors: ["Cloud Roll", "Midnight Roll", "Fruity Roll", "Citrus Roll", "Mocha Roll"]
     },
 
-    // COOKIES & GIFTING
+    // 3. COOKIES
     {
       id: "cook-1",
-      name: "Classic Butter Cookies Box",
-      desc: "Melt-in-your-mouth French style butter cookies presented in an artisan transparent gift box.",
+      name: "Choco Chip Bliss",
+      desc: "Golden baked French-style butter cookies packed with rich dark chocolate chips.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-21 at 7.33.01 PM (21).jpeg",
-      category: "Cookies & Gifting",
-      tag: "Gift Favorite"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (27).jpeg",
+      category: "Cookies",
+      tag: "Popular"
     },
     {
       id: "cook-2",
-      name: "Assorted Butter Cookies Box",
-      desc: "Hand-piped decorative butter cookies in chocolate, vanilla, and almond flavors in a luxury box.",
+      name: "Checker Charm",
+      desc: "Handcrafted duo-tone cocoa and vanilla checkerboard butter cookies.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-22 at 10.51.15 AM.jpeg",
-      category: "Cookies & Gifting"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.08 PM (2).jpeg",
+      category: "Cookies"
     },
     {
       id: "cook-3",
-      name: "Assorted Cookies Platter",
-      desc: "Curated selection of gourmet artisan cookies — an elegant sweet gift for any occasion.",
+      name: "Jammy Drops",
+      desc: "Delicate thumbprint butter cookies filled with sweet fruit jam centers.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-22 at 10.55.42 AM.jpeg",
-      category: "Cookies & Gifting"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (8).jpeg",
+      category: "Cookies"
     },
     {
       id: "cook-4",
-      name: "Artisan Cookie Selection Box",
-      desc: "Handcrafted cookie assortment thoughtfully arranged in a ribboned presentation gift box.",
+      name: "Golden Butter Bliss",
+      desc: "Melt-in-your-mouth classic golden French butter cookies baked to perfection.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-22 at 10.55.42 AM (1).jpeg",
-      category: "Cookies & Gifting"
-    },
-    {
-      id: "cook-5",
-      name: "Artisan Cookie Tin",
-      desc: "Deluxe multi-variety artisan cookies in a classic gold tin — perfect for corporate and holiday gifting.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-22 at 10.55.42 AM (3).jpeg",
-      category: "Cookies & Gifting"
+      img: "/WhatsApp Image 2026-07-21 at 7.33.01 PM (21).jpeg",
+      category: "Cookies"
     },
 
-    // DOUGHNUTS
-    {
-      id: "don-1",
-      name: "Chocolate Sprinkle Doughnut",
-      desc: "Airy yeast doughnut coated in Belgian dark chocolate glaze with rainbow sprinkles.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (5).jpeg",
-      category: "Doughnuts"
-    },
-    {
-      id: "don-2",
-      name: "Classic Sugar Ring Doughnut",
-      desc: "Pillowy soft brioche doughnut rolled in organic cane sugar — timeless simplicity.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (6).jpeg",
-      category: "Doughnuts"
-    },
-    {
-      id: "don-3",
-      name: "Glazed Ring Doughnut",
-      desc: "Classic ring doughnut with a glossy, light vanilla bean glaze.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-25 at 12.41.15 PM.jpeg",
-      category: "Doughnuts"
-    },
-    {
-      id: "don-4",
-      name: "Assorted Doughnut Box",
-      desc: "Box of 6 handcrafted glazed, dusted, and filled doughnuts for sharing.",
-      diet: "egg",
-      img: "/WhatsApp Image 2026-07-25 at 12.43.37 PM.jpeg",
-      category: "Doughnuts"
-    },
-
-    // CHEESECAKES
+    // 4. ARTISANS CHEESECAKES & DESSERT JARS
     {
       id: "ch-1",
-      name: "Biscoff Cheesecake",
-      desc: "Creamy baked cheesecake on a Biscoff biscuit crust, finished with warm caramel-Biscoff spread.",
+      name: "Biscoff Bliss Cheesecake",
+      desc: "Creamy cheesecake on a Lotus Biscoff biscuit crust, topped with warm Biscoff spread and crushed cookie crumble.",
       diet: "veg",
       img: "/images (7).jpg",
-      category: "Cheesecakes",
-      tag: "Must Try"
+      category: "Artisan Cheesecakes & Dessert Jars",
+      tag: "Signature"
     },
     {
       id: "ch-2",
-      name: "Mango Majesty Cheesecake",
-      desc: "Tropical cheesecake with smooth fresh Alphonso mango compote topping and mango slice fans.",
+      name: "Oreo Obsession",
+      desc: "Decadent cookie cheesecake bar layered with rich dark chocolate glaze and Oreo biscuit halves.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-25 at 12.10.34 PM.jpeg",
-      category: "Cheesecakes"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (9).jpeg",
+      category: "Artisan Cheesecakes & Dessert Jars"
     },
     {
       id: "ch-3",
-      name: "Classic Vanilla Bean Cheesecake",
-      desc: "Rich New York style cheesecake infused with Madagascan vanilla bean on a buttery graham crust.",
+      name: "Mango Majesty",
+      desc: "Tropical cheesecake slab with smooth Alphonso mango glaze and fresh mint-garnished mango slice fans.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-25 at 12.31.14 PM.jpeg",
-      category: "Cheesecakes"
+      img: "/WhatsApp Image 2026-07-25 at 12.10.34 PM.jpeg",
+      category: "Artisan Cheesecakes & Dessert Jars",
+      tag: "Seasonal"
     },
     {
       id: "ch-4",
-      name: "Berry Swirl Cheesecake",
-      desc: "Creamy vanilla cheesecake ribboned with fresh wild berry compote swirl.",
+      name: "Berry Bliss Dessert Jar",
+      desc: "Indulgent layered glass jar with butter biscuit crust, vanilla cheesecake cream, and fresh wild berry compote.",
       diet: "veg",
-      img: "/WhatsApp Image 2026-07-25 at 12.32.41 PM.jpeg",
-      category: "Cheesecakes"
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (3).jpeg",
+      category: "Artisan Cheesecakes & Dessert Jars"
     },
 
-    // LOAVES & CROISSANTS
+    // 5. DONUTS
     {
-      id: "loaf-1",
-      name: "Chocolate Drizzle Loaf",
-      desc: "Rich dark chocolate loaf finished with a glossy chocolate drip and fresh berry accents.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM.jpeg",
-      category: "Loaves & Croissants"
+      id: "don-1",
+      name: "Frosted Midnight",
+      desc: "Soft yeast donut dipped in rich dark chocolate icing and decorated with golden sprinkles.",
+      diet: "egg",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (5).jpeg",
+      category: "Donuts"
     },
     {
-      id: "loaf-2",
-      name: "Chocolate Hazelnut Marble Bars",
-      desc: "Swirled marble cake coated in smooth milk chocolate and roasted whole hazelnuts.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.08 PM (2).jpeg",
-      category: "Loaves & Croissants"
+      id: "don-2",
+      name: "Cinnamon Sugar",
+      desc: "Soft brioche donut tossed in fragrant cinnamon sugar for a warm, comforting finish.",
+      diet: "egg",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (6).jpeg",
+      category: "Donuts"
     },
     {
-      id: "loaf-3",
-      name: "Artisan Butter Croissants",
-      desc: "French style golden croissants with honeycomb interior structure and flaky buttery crust.",
+      id: "don-3",
+      name: "Classic Glazed Donut",
+      desc: "Timeless ring donut with a light, glossy vanilla bean glaze.",
+      diet: "egg",
+      img: "/WhatsApp Image 2026-07-25 at 12.41.15 PM.jpeg",
+      category: "Donuts"
+    },
+    {
+      id: "don-4",
+      name: "Caramel Crumble",
+      desc: "Golden donut drizzled with warm salted caramel glaze and topped with crunchy crumble.",
       diet: "egg",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (7).jpeg",
-      category: "Loaves & Croissants"
+      category: "Donuts"
     },
     {
-      id: "loaf-4",
-      name: "Vanilla Swiss Roll",
-      desc: "Soft sponge cake roll swirled with light vanilla bean cream filling.",
+      id: "don-5",
+      name: "Midnight Oreo",
+      desc: "Dark chocolate glazed donut topped generously with crushed Oreo cookies.",
       diet: "egg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (12).jpeg",
-      category: "Loaves & Croissants"
-    },
-    {
-      id: "loaf-5",
-      name: "Chocolate Chunk Banana Bread",
-      desc: "Moist banana bread studded with dark chocolate chunks and caramelized banana top.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (16).jpeg",
-      category: "Loaves & Croissants"
+      img: "/WhatsApp Image 2026-07-25 at 12.43.37 PM.jpeg",
+      category: "Donuts"
     },
 
-    // CELEBRATION CAKES
+    // 6. CREAMY YOGURTS
+    {
+      id: "yog-1",
+      name: "Blue Velvet",
+      desc: "Silky cultured yogurt layered with sweet blueberry compote swirl on a biscuit crumble base.",
+      diet: "veg",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (22).jpeg",
+      category: "Creamy Yogurts",
+      tag: "Fresh & Healthy"
+    },
+    {
+      id: "yog-2",
+      name: "Berry Blossom",
+      desc: "Rich cultured yogurt blended with fresh strawberry puree, served with whole ripe strawberries.",
+      diet: "veg",
+      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (21).jpeg",
+      category: "Creamy Yogurts"
+    },
+
+    // 7. CELEBRATION CAKES
     {
       id: "cake-1",
-      name: "Samar's Cricket Pitch Cake",
-      desc: "Bespoke celebration cake featuring handcrafted fondant cricket bat, ball, wickets, and green pitch.",
+      name: "Custom Celebration & Theme Cakes",
+      desc: "Bespoke handcrafted cakes tailored for birthdays and anniversaries with custom theme sculpting and artistic buttercream.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (18).jpeg",
       category: "Celebration Cakes",
+      flavors: [
+        "Plain Sweet Vanilla",
+        "Chocolate",
+        "Pineapple",
+        "Mixed Fruits",
+        "Customized Cream / Buttercream",
+        "Fondant Celebration",
+        "Ferrero Rocher",
+        "Chocolate Truffle",
+        "Black Forest"
+      ],
       tag: "Custom Bespoke"
     },
     {
@@ -320,14 +288,6 @@ export default function Home() {
     },
     {
       id: "cake-3",
-      name: "Ice Cream Carnival Cake",
-      desc: "Playful celebration cake topped with upside-down waffle cones overflowing with colourful frosting.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (20).jpeg",
-      category: "Celebration Cakes"
-    },
-    {
-      id: "cake-4",
       name: "Butterfly Garden Cake",
       desc: "Artistic butterfly-shaped cake piped with pastel buttercreams and edible sugar pearls.",
       diet: "both",
@@ -335,7 +295,7 @@ export default function Home() {
       category: "Celebration Cakes"
     },
     {
-      id: "cake-5",
+      id: "cake-4",
       name: "Ojus Cricket Player Cake",
       desc: "Personalized sports birthday cake featuring handcrafted edible player figurine and cricket match detailing.",
       diet: "both",
@@ -343,43 +303,11 @@ export default function Home() {
       category: "Celebration Cakes"
     },
     {
-      id: "cake-6",
-      name: "Racing Celebration Cake",
-      desc: "Chequered racing flag pattern celebration cake with vibrant blue piping and gold birthday topper.",
-      diet: "both",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.08 PM (1).jpeg",
-      category: "Celebration Cakes"
-    },
-    {
-      id: "cake-7",
-      name: "Triple Chocolate Layer Cake",
-      desc: "Layered Belgian chocolate cake decorated with wafer rolls, chocolate drip, and cocoa dust.",
+      id: "cake-5",
+      name: "Ferrero Rocher & Chocolate Truffle Gateau",
+      desc: "Layered Belgian chocolate cake decorated with hazelnut crunch, chocolate drip, and cocoa dust.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (25).jpeg",
-      category: "Celebration Cakes"
-    },
-    {
-      id: "cake-8",
-      name: "Mango Bliss Cake",
-      desc: "Fresh mango sponge layered with Alphonso puree cream and topped with fresh mango rosettes.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (28).jpeg",
-      category: "Celebration Cakes"
-    },
-    {
-      id: "cake-9",
-      name: "Red Velvet Heart Cake",
-      desc: "Elegant heart-shaped red velvet cake with glossy crimson mirror glaze and silver pearls.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-31 at 5.08.53 PM.jpeg",
-      category: "Celebration Cakes"
-    },
-    {
-      id: "cake-10",
-      name: "Golden 50th Anniversary Cake",
-      desc: "Luxurious white velvet cake adorned with gold leaf, edible pearls, and custom anniversary topper.",
-      diet: "veg",
-      img: "/WhatsApp Image 2026-07-31 at 5.08.51 PM.jpeg",
       category: "Celebration Cakes"
     }
   ];
@@ -387,11 +315,11 @@ export default function Home() {
   const categories = [
     "All",
     "Cupcakes",
-    "Tarts & Desserts",
-    "Cookies & Gifting",
-    "Doughnuts",
-    "Cheesecakes",
-    "Loaves & Croissants",
+    "Teacakes",
+    "Cookies",
+    "Artisan Cheesecakes & Dessert Jars",
+    "Donuts",
+    "Creamy Yogurts",
     "Celebration Cakes"
   ];
 
@@ -465,7 +393,7 @@ export default function Home() {
             </h1>
 
             <p className="text-base sm:text-lg text-[#59483D] font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Welcome to <span className="font-semibold text-[#1A1412]">Ozee&apos;s</span>. Every cake, cookie, cheesecake, and pastry is handcrafted in small batches using pure, premium ingredients — bringing together Parisian pâtisserie craftsmanship and the heartwarming comfort of home.
+              Welcome to <span className="font-semibold text-[#1A1412]">Ozee&apos;s</span>. Every cupcake, teacake, cookie, cheesecake, donut, and creamy yogurt is handcrafted in small batches using pure, premium ingredients.
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
@@ -473,10 +401,10 @@ export default function Home() {
                 href="#menu"
                 className="bg-[#1A1412] hover:bg-[#362720] text-[#FFFDF9] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl hover:shadow-2xl"
               >
-                Explore Bake Collection
+                Explore Menu Collection
               </a>
               <a
-                href={wa()}
+                href={wa("Custom Celebration Cake")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="border border-[#D4AF37] text-[#1A1412] hover:bg-[#D4AF37] hover:text-white px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all"
@@ -508,20 +436,20 @@ export default function Home() {
             <div className="space-y-4">
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
                 <Image
-                  src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (10).jpeg"
-                  alt="Fresh Fruit Cream Gateau Showcase"
+                  src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg"
+                  alt="Berry Crown Cupcakes Showcase"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex items-end">
-                  <span className="text-white text-xs font-semibold">Artisanal Cakes</span>
+                  <span className="text-white text-xs font-semibold">Berry Crown Cupcakes</span>
                 </div>
               </div>
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-white group">
                 <Image
-                  src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (11).jpeg"
-                  alt="Black Forest Gateau"
+                  src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg"
+                  alt="Hazelnut Heaven Teacake"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -531,8 +459,8 @@ export default function Home() {
             <div className="pt-8 space-y-4">
               <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-white group">
                 <Image
-                  src="/WhatsApp Image 2026-07-25 at 12.33.14 PM.jpeg"
-                  alt="Caramel Drizzle Cheesecake Showcase"
+                  src="/images (7).jpg"
+                  alt="Biscoff Bliss Cheesecake Showcase"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                   priority
@@ -540,8 +468,8 @@ export default function Home() {
               </div>
               <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
                 <Image
-                  src="/WhatsApp Image 2026-07-25 at 12.33.49 PM.jpeg"
-                  alt="Chocolate Cheesecake Showcase"
+                  src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (22).jpeg"
+                  alt="Blue Velvet Creamy Yogurt Showcase"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
@@ -607,7 +535,7 @@ export default function Home() {
               Our Artisanal Bake Collection
             </h2>
             <p className="text-[#59483D] font-light text-base sm:text-lg">
-              Explore our small-batch cakes, pastries, tarts, cookies, cheesecakes, and custom theme bakes.
+              Explore our fresh small-batch cupcakes, teacakes, cookies, cheesecakes, donuts, yogurts, and custom celebration cakes.
             </p>
           </div>
 
@@ -659,6 +587,24 @@ export default function Home() {
                       <DietaryBadge type={item.diet} />
                     </div>
                     <p className="text-xs text-[#59483D] font-light leading-relaxed">{item.desc}</p>
+
+                    {item.flavors && item.flavors.length > 0 && (
+                      <div className="pt-2">
+                        <span className="text-[10px] uppercase tracking-wider font-semibold text-[#8C6D23] block mb-1.5">
+                          Available Flavors:
+                        </span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {item.flavors.map((flv) => (
+                            <span
+                              key={flv}
+                              className="bg-[#F5EFE4] text-[#59483D] border border-[#E5D7BF] text-[10px] px-2.5 py-1 rounded-full font-medium"
+                            >
+                              {flv}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -719,11 +665,11 @@ export default function Home() {
                 <div className="space-y-4 text-sm text-[#59483D]">
                   <div className="flex gap-4 items-start">
                     <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">1</span>
-                    <p><strong className="text-[#1A1412]">Browse & Select:</strong> Choose your favorite treats from our menu.</p>
+                    <p><strong className="text-[#1A1412]">Browse & Select:</strong> Choose your favorite treats from our menu categories.</p>
                   </div>
                   <div className="flex gap-4 items-start">
                     <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">2</span>
-                    <p><strong className="text-[#1A1412]">Share Requirements:</strong> Send us product name, quantity, egg/eggless preference, and pickup date via WhatsApp.</p>
+                    <p><strong className="text-[#1A1412]">Share Requirements:</strong> Send us product name, desired flavor, quantity, egg/eggless preference, and pickup date via WhatsApp.</p>
                   </div>
                   <div className="flex gap-4 items-start">
                     <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">3</span>
@@ -743,7 +689,8 @@ export default function Home() {
                 <h3 className="font-serif text-3xl font-bold text-[#FFFDF9] mt-2 mb-6">Order Timelines</h3>
                 <div className="space-y-4 text-sm text-[#E5D7BF]">
                   <p>• <strong>Cupcakes, Cookies & Donuts:</strong> 24 – 36 hours notice</p>
-                  <p>• <strong>Cheesecakes & Tarts:</strong> 48 – 72 hours notice</p>
+                  <p>• <strong>Teacakes & Creamy Yogurts:</strong> 24 – 48 hours notice</p>
+                  <p>• <strong>Cheesecakes & Dessert Jars:</strong> 48 – 72 hours notice</p>
                   <p>• <strong>Custom Theme & Celebration Cakes:</strong> Contact in advance</p>
                 </div>
               </div>
