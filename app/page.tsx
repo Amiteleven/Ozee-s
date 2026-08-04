@@ -35,9 +35,102 @@ interface Product {
   desc: string;
   diet: "veg" | "egg" | "both";
   img: string;
+  images?: string[];
   category: string;
   flavors?: string[];
   tag?: string;
+}
+
+function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => string }) {
+  const [currentImg, setCurrentImg] = useState(item.img);
+  const allImages = item.images && item.images.length > 0 ? item.images : [item.img];
+
+  return (
+    <div className="bg-white rounded-3xl overflow-hidden border border-[#EBE3D5] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+      {/* 1. HEADING ABOVE PICS (As per PDF document structure) */}
+      <div className="p-6 pb-4 border-b border-[#F5EFE4] bg-[#FAF6F0]/60">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="font-serif text-xl font-bold text-[#1A1412] leading-snug">{item.name}</h3>
+            <span className="text-[10px] text-[#8C6D23] font-semibold uppercase tracking-wider block mt-0.5">{item.category}</span>
+          </div>
+          <DietaryBadge type={item.diet} />
+        </div>
+      </div>
+
+      {/* 2. PICS BELOW HEADING */}
+      <div className="relative aspect-[4/3] bg-[#F7F2E8] overflow-hidden">
+        <Image
+          src={currentImg}
+          alt={item.name}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-700"
+        />
+        {item.tag && (
+          <span className="absolute top-3 left-3 bg-[#D4AF37] text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-md z-10">
+            {item.tag}
+          </span>
+        )}
+      </div>
+
+      {/* Multiple Image Gallery Selector if item has multiple photos in PDF */}
+      {allImages.length > 1 && (
+        <div className="flex gap-2 px-4 py-2.5 bg-[#F5EFE4] border-b border-[#EBE3D5] items-center">
+          <span className="text-[9px] uppercase tracking-wider text-[#8C6D23] font-bold mr-1">Views:</span>
+          {allImages.map((imgUrl, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentImg(imgUrl)}
+              className={`relative w-10 h-10 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
+                currentImg === imgUrl ? "border-[#D4AF37] scale-105 shadow-md ring-2 ring-[#D4AF37]/30" : "border-transparent opacity-60 hover:opacity-100"
+              }`}
+            >
+              <Image src={imgUrl} alt={`${item.name} photo ${idx + 1}`} fill className="object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* 3. DETAILS & ORDER BUTTON BELOW PICS */}
+      <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+        <div className="space-y-3">
+          <p className="text-xs text-[#59483D] font-light leading-relaxed">{item.desc}</p>
+
+          {item.flavors && item.flavors.length > 0 && (
+            <div className="pt-2">
+              <span className="text-[10px] uppercase tracking-wider font-semibold text-[#8C6D23] block mb-1.5">
+                Flavors / Varieties:
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {item.flavors.map((flv) => (
+                  <span
+                    key={flv}
+                    className="bg-[#F5EFE4] text-[#59483D] border border-[#E5D7BF] text-[10px] px-2.5 py-1 rounded-full font-medium"
+                  >
+                    {flv}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="pt-4 flex items-center justify-between border-t border-[#F5EFE4] mt-2">
+          <span className="text-[10px] text-[#8C6D23] font-semibold uppercase tracking-wider">
+            {item.diet === "both" ? "Egg & Eggless Options" : item.diet === "veg" ? "100% Eggless" : "Contains Egg"}
+          </span>
+          <a
+            href={wa(item.name)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs bg-[#1A1412] hover:bg-[#D4AF37] text-white hover:text-[#1A1412] px-6 py-2.5 rounded-full uppercase tracking-wider font-semibold transition-all shadow-md"
+          >
+            Order
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default function Home() {
@@ -59,6 +152,10 @@ export default function Home() {
       desc: "Fluffy sponge cupcakes topped with rich whipped icing, fresh berries, and seasonal fruits.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg",
+      images: [
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (24).jpeg"
+      ],
       category: "Cupcakes",
       flavors: ["Strawberry", "Blueberry", "Seasonal Fruits"],
       tag: "Bestseller"
@@ -69,6 +166,10 @@ export default function Home() {
       desc: "Our signature trio of luxury piped cupcakes in rich dark chocolate, vanilla snowdrop, and red velvet.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (2).jpeg",
+      images: [
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (2).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (26).jpeg"
+      ],
       category: "Cupcakes",
       flavors: ["Midnight Swirl (Rich Chocolate)", "Sweet Snowdrop (Vanilla)", "Vibrant Ruby (Red Velvet)"]
     },
@@ -80,6 +181,10 @@ export default function Home() {
       desc: "Decadent dark chocolate loaf cake decorated with delicate white edible flower accents and candied citrus peel.",
       diet: "egg",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (13).jpeg",
+      images: [
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (13).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (10).jpeg"
+      ],
       category: "Teacakes"
     },
     {
@@ -88,6 +193,10 @@ export default function Home() {
       desc: "Rich cocoa loaf bar coated in a silky milk chocolate glaze and topped with roasted whole hazelnuts.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg",
+      images: [
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.08 PM (2).jpeg"
+      ],
       category: "Teacakes",
       tag: "Chef's Special"
     },
@@ -264,6 +373,13 @@ export default function Home() {
       desc: "Bespoke handcrafted cakes tailored for birthdays and anniversaries with custom theme sculpting and artistic buttercream.",
       diet: "both",
       img: "/WhatsApp Image 2026-07-31 at 4.55.09 PM (18).jpeg",
+      images: [
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (18).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (19).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (21).jpeg",
+        "/WhatsApp Image 2026-07-31 at 5.08.53 PM (1).jpeg",
+        "/WhatsApp Image 2026-07-31 at 4.55.09 PM (25).jpeg"
+      ],
       category: "Celebration Cakes",
       flavors: [
         "Plain Sweet Vanilla",
@@ -311,6 +427,7 @@ export default function Home() {
       category: "Celebration Cakes"
     }
   ];
+
 
   const categories = [
     "All",
@@ -554,76 +671,12 @@ export default function Home() {
                 {cat}
               </button>
             ))}
-          </div>
-
-          {/* Catalog Grid */}
+               {/* Catalog Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((item) => (
-              <div
-                key={item.id}
-                className="bg-white rounded-3xl overflow-hidden border border-[#EBE3D5] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="relative aspect-[4/3] bg-[#F7F2E8] overflow-hidden">
-                    <Image
-                      src={item.img}
-                      alt={item.name}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    {item.tag && (
-                      <span className="absolute top-3 left-3 bg-[#D4AF37] text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-md">
-                        {item.tag}
-                      </span>
-                    )}
-                    <span className="absolute bottom-3 left-3 bg-[#1A1412]/80 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-medium px-3 py-1 rounded-full">
-                      {item.category}
-                    </span>
-                  </div>
-
-                  <div className="p-6 space-y-3">
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="font-serif text-xl font-bold text-[#1A1412] leading-snug">{item.name}</h3>
-                      <DietaryBadge type={item.diet} />
-                    </div>
-                    <p className="text-xs text-[#59483D] font-light leading-relaxed">{item.desc}</p>
-
-                    {item.flavors && item.flavors.length > 0 && (
-                      <div className="pt-2">
-                        <span className="text-[10px] uppercase tracking-wider font-semibold text-[#8C6D23] block mb-1.5">
-                          Available Flavors:
-                        </span>
-                        <div className="flex flex-wrap gap-1.5">
-                          {item.flavors.map((flv) => (
-                            <span
-                              key={flv}
-                              className="bg-[#F5EFE4] text-[#59483D] border border-[#E5D7BF] text-[10px] px-2.5 py-1 rounded-full font-medium"
-                            >
-                              {flv}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="p-6 pt-0 flex items-center justify-between border-t border-[#F5EFE4] mt-4">
-                  <span className="text-[10px] text-[#8C6D23] font-semibold uppercase tracking-wider">
-                    {item.diet === "both" ? "Egg & Eggless Options" : item.diet === "veg" ? "100% Eggless" : "Contains Egg"}
-                  </span>
-                  <a
-                    href={wa(item.name)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs bg-[#1A1412] hover:bg-[#D4AF37] text-white hover:text-[#1A1412] px-6 py-2.5 rounded-full uppercase tracking-wider font-semibold transition-all shadow-md"
-                  >
-                    Order
-                  </a>
-                </div>
-              </div>
+              <ProductCard key={item.id} item={item} wa={wa} />
             ))}
-          </div>
+          </div>         </div>
 
         </div>
       </section>
