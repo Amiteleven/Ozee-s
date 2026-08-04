@@ -6,24 +6,24 @@ import { useState } from "react";
 function DietaryBadge({ type }: { type: "veg" | "egg" | "both" }) {
   if (type === "both") {
     return (
-      <span className="inline-flex items-center gap-1 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-full text-[10px] text-amber-900 font-medium">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
-        <span className="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+      <span className="inline-flex items-center gap-1 bg-amber-950/80 border border-amber-500/40 px-2.5 py-1 rounded-full text-[10px] text-amber-200 font-medium">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+        <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
         <span>Egg & Eggless</span>
       </span>
     );
   }
   if (type === "veg") {
     return (
-      <span className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full text-[10px] text-emerald-800 font-medium">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+      <span className="inline-flex items-center gap-1.5 bg-emerald-950/80 border border-emerald-500/40 px-2.5 py-1 rounded-full text-[10px] text-emerald-300 font-medium">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
         <span>100% Eggless</span>
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 bg-rose-50 border border-rose-200 px-2 py-0.5 rounded-full text-[10px] text-rose-800 font-medium">
-      <span className="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+    <span className="inline-flex items-center gap-1.5 bg-rose-950/80 border border-rose-500/40 px-2.5 py-1 rounded-full text-[10px] text-rose-300 font-medium">
+      <span className="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
       <span>Contains Egg</span>
     </span>
   );
@@ -46,20 +46,20 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
   const allImages = item.images && item.images.length > 0 ? item.images : [item.img];
 
   return (
-    <div className="bg-white rounded-3xl overflow-hidden border border-[#EBE3D5] shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-      {/* 1. HEADING ABOVE PICS (As per PDF document structure) */}
-      <div className="p-6 pb-4 border-b border-[#F5EFE4] bg-[#FAF6F0]/60">
+    <div className="bg-[#140F0C] rounded-3xl overflow-hidden border border-[#2B2119] shadow-lg hover:shadow-2xl hover:shadow-[#E6C665]/10 hover:border-[#E6C665]/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
+      {/* 1. HEADING ABOVE PICS (Dark Theme) */}
+      <div className="p-6 pb-4 border-b border-[#241A13] bg-[#1A140F]">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <h3 className="font-serif text-xl font-bold text-[#1A1412] leading-snug">{item.name}</h3>
-            <span className="text-[10px] text-[#8C6D23] font-semibold uppercase tracking-wider block mt-0.5">{item.category}</span>
+            <h3 className="font-serif text-xl font-bold text-[#F5EFE6] leading-snug group-hover:text-[#E6C665] transition-colors">{item.name}</h3>
+            <span className="text-[10px] text-[#E6C665] font-semibold uppercase tracking-wider block mt-0.5">{item.category}</span>
           </div>
           <DietaryBadge type={item.diet} />
         </div>
       </div>
 
       {/* 2. PICS BELOW HEADING */}
-      <div className="relative aspect-[4/3] bg-[#F7F2E8] overflow-hidden">
+      <div className="relative aspect-[4/3] bg-[#0A0705] overflow-hidden">
         <Image
           src={currentImg}
           alt={item.name}
@@ -67,22 +67,22 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
           className="object-cover group-hover:scale-105 transition-transform duration-700"
         />
         {item.tag && (
-          <span className="absolute top-3 left-3 bg-[#D4AF37] text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-md z-10">
+          <span className="absolute top-3 left-3 bg-[#E6C665] text-[#0B0806] text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-md z-10">
             {item.tag}
           </span>
         )}
       </div>
 
-      {/* Multiple Image Gallery Selector if item has multiple photos in PDF */}
+      {/* Multiple Image Gallery Selector */}
       {allImages.length > 1 && (
-        <div className="flex gap-2 px-4 py-2.5 bg-[#F5EFE4] border-b border-[#EBE3D5] items-center">
-          <span className="text-[9px] uppercase tracking-wider text-[#8C6D23] font-bold mr-1">Views:</span>
+        <div className="flex gap-2 px-4 py-2.5 bg-[#18110D] border-b border-[#291F17] items-center">
+          <span className="text-[9px] uppercase tracking-wider text-[#E6C665] font-bold mr-1">Views:</span>
           {allImages.map((imgUrl, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentImg(imgUrl)}
               className={`relative w-10 h-10 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
-                currentImg === imgUrl ? "border-[#D4AF37] scale-105 shadow-md ring-2 ring-[#D4AF37]/30" : "border-transparent opacity-60 hover:opacity-100"
+                currentImg === imgUrl ? "border-[#E6C665] scale-105 shadow-md ring-2 ring-[#E6C665]/30" : "border-[#33261C] opacity-60 hover:opacity-100"
               }`}
             >
               <Image src={imgUrl} alt={`${item.name} photo ${idx + 1}`} fill className="object-cover" />
@@ -94,18 +94,18 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
       {/* 3. DETAILS & ORDER BUTTON BELOW PICS */}
       <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
         <div className="space-y-3">
-          <p className="text-xs text-[#59483D] font-light leading-relaxed">{item.desc}</p>
+          <p className="text-xs text-[#D6C7B8] font-light leading-relaxed">{item.desc}</p>
 
           {item.flavors && item.flavors.length > 0 && (
             <div className="pt-2">
-              <span className="text-[10px] uppercase tracking-wider font-semibold text-[#8C6D23] block mb-1.5">
+              <span className="text-[10px] uppercase tracking-wider font-semibold text-[#E6C665] block mb-1.5">
                 Flavors / Varieties:
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {item.flavors.map((flv) => (
                   <span
                     key={flv}
-                    className="bg-[#F5EFE4] text-[#59483D] border border-[#E5D7BF] text-[10px] px-2.5 py-1 rounded-full font-medium"
+                    className="bg-[#241B14] text-[#E5D6C5] border border-[#3D2F23] text-[10px] px-2.5 py-1 rounded-full font-medium"
                   >
                     {flv}
                   </span>
@@ -115,15 +115,15 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
           )}
         </div>
 
-        <div className="pt-4 flex items-center justify-between border-t border-[#F5EFE4] mt-2">
-          <span className="text-[10px] text-[#8C6D23] font-semibold uppercase tracking-wider">
+        <div className="pt-4 flex items-center justify-between border-t border-[#241A13] mt-2">
+          <span className="text-[10px] text-[#E6C665] font-semibold uppercase tracking-wider">
             {item.diet === "both" ? "Egg & Eggless Options" : item.diet === "veg" ? "100% Eggless" : "Contains Egg"}
           </span>
           <a
             href={wa(item.name)}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs bg-[#1A1412] hover:bg-[#D4AF37] text-white hover:text-[#1A1412] px-6 py-2.5 rounded-full uppercase tracking-wider font-semibold transition-all shadow-md"
+            className="text-xs bg-[#E6C665] hover:bg-[#D4AF37] text-[#0B0806] font-bold px-6 py-2.5 rounded-full uppercase tracking-wider transition-all shadow-md shadow-[#E6C665]/20 hover:scale-105"
           >
             Order
           </a>
@@ -428,7 +428,6 @@ export default function Home() {
     }
   ];
 
-
   const categories = [
     "All",
     "Cupcakes",
@@ -445,39 +444,39 @@ export default function Home() {
     : catalog.filter(p => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#1A1412] font-sans selection:bg-[#D4AF37]/30">
+    <div className="min-h-screen bg-[#0B0806] text-[#F5EFE6] font-sans selection:bg-[#E6C665]/30">
 
       {/* Top Banner */}
-      <div className="bg-[#18110D] text-[#D4AF37] text-[11px] uppercase tracking-[0.25em] font-medium py-2.5 px-4 text-center border-b border-[#2C1F18]">
+      <div className="bg-[#050403] text-[#E6C665] text-[11px] uppercase tracking-[0.25em] font-medium py-2.5 px-4 text-center border-b border-[#211811]">
         <span>✦ Handcrafted Small-Batch Bakery • Made Fresh Like Home • Order via WhatsApp: +91 99009 51492 ✦</span>
       </div>
 
-      {/* Luxury Sticky Header */}
-      <header className="sticky top-0 z-50 bg-[#FDFBF7]/90 backdrop-blur-xl border-b border-[#EBE3D5] transition-all">
+      {/* Luxury Sticky Header (Dark Obsidian Glass) */}
+      <header className="sticky top-0 z-50 bg-[#0B0806]/90 backdrop-blur-xl border-b border-[#261D16] transition-all">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-[0.15em] uppercase text-[#4A3B32]">
-            <a href="#about" className="hover:text-[#D4AF37] transition-colors relative py-1 group">
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-[0.15em] uppercase text-[#D6C7B8]">
+            <a href="#about" className="hover:text-[#E6C665] transition-colors relative py-1 group">
               Our Story
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#menu" className="hover:text-[#D4AF37] transition-colors relative py-1 group">
+            <a href="#menu" className="hover:text-[#E6C665] transition-colors relative py-1 group">
               Bake Collection
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
             </a>
-            <a href="#ordering" className="hover:text-[#D4AF37] transition-colors relative py-1 group">
+            <a href="#ordering" className="hover:text-[#E6C665] transition-colors relative py-1 group">
               Ordering Process
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
             </a>
           </nav>
 
           {/* Brand Logo */}
           <a href="#" className="flex flex-col items-center group">
-            <div className="w-10 h-10 rounded-full border border-[#D4AF37] flex items-center justify-center font-serif text-xl font-bold text-[#1A1412] group-hover:bg-[#1A1412] group-hover:text-[#D4AF37] transition-all duration-300 shadow-sm">
+            <div className="w-10 h-10 rounded-full border border-[#E6C665] flex items-center justify-center font-serif text-xl font-bold text-[#F5EFE6] group-hover:bg-[#E6C665] group-hover:text-[#0B0806] transition-all duration-300 shadow-md">
               O
             </div>
-            <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#1A1412] -mt-0.5">OZEE&apos;S</span>
-            <span className="text-[8px] uppercase tracking-[0.35em] text-[#D4AF37] font-semibold -mt-1">Pâtisserie & Artisanal Bakes</span>
+            <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#F5EFE6] -mt-0.5">OZEE&apos;S</span>
+            <span className="text-[8px] uppercase tracking-[0.35em] text-[#E6C665] font-semibold -mt-1">Pâtisserie & Artisanal Bakes</span>
           </a>
 
           <div className="flex items-center gap-4">
@@ -485,7 +484,7 @@ export default function Home() {
               href={wa()}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+              className="bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center gap-2"
             >
               <span>WhatsApp Order</span>
             </a>
@@ -494,29 +493,29 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Showcase Section */}
-      <section className="relative py-20 lg:py-28 overflow-hidden border-b border-[#EBE3D5] bg-gradient-to-b from-[#FFFDF9] via-[#FDFBF7] to-[#F7F2E8]">
+      {/* Hero Showcase Section (Luxury Dark Gradient) */}
+      <section className="relative py-20 lg:py-28 overflow-hidden border-b border-[#261D16] bg-gradient-to-b from-[#090705] via-[#0F0B08] to-[#15100B]">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
           
           <div className="lg:col-span-6 space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-3 bg-[#F4ECDC] border border-[#E5D7BF] px-4 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#D4AF37] animate-pulse"></span>
-              <span className="text-[#8C6D23] text-xs font-semibold uppercase tracking-[0.25em]">Artisanal Homemade Bakery</span>
+            <div className="inline-flex items-center gap-3 bg-[#1D150E] border border-[#3B2B1D] px-4 py-1.5 rounded-full">
+              <span className="w-2 h-2 rounded-full bg-[#E6C665] animate-pulse"></span>
+              <span className="text-[#E6C665] text-xs font-semibold uppercase tracking-[0.25em]">Artisanal Homemade Bakery</span>
             </div>
 
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#1A1412] leading-[1.08] tracking-tight">
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F5EFE6] leading-[1.08] tracking-tight">
               Crafted with Love.<br />
-              <span className="italic font-normal text-[#B88E28]">Made Like Home.</span>
+              <span className="italic font-normal text-[#E6C665]">Made Like Home.</span>
             </h1>
 
-            <p className="text-base sm:text-lg text-[#59483D] font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Welcome to <span className="font-semibold text-[#1A1412]">Ozee&apos;s</span>. Every cupcake, teacake, cookie, cheesecake, donut, and creamy yogurt is handcrafted in small batches using pure, premium ingredients.
+            <p className="text-base sm:text-lg text-[#C7B7A7] font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+              Welcome to <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>. Every cupcake, teacake, cookie, cheesecake, donut, and creamy yogurt is handcrafted in small batches using pure, premium ingredients.
             </p>
 
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
               <a
                 href="#menu"
-                className="bg-[#1A1412] hover:bg-[#362720] text-[#FFFDF9] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all shadow-xl hover:shadow-2xl"
+                className="bg-[#E6C665] hover:bg-[#D4AF37] text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl shadow-[#E6C665]/15 hover:scale-105"
               >
                 Explore Menu Collection
               </a>
@@ -524,25 +523,25 @@ export default function Home() {
                 href={wa("Custom Celebration Cake")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="border border-[#D4AF37] text-[#1A1412] hover:bg-[#D4AF37] hover:text-white px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all"
+                className="border border-[#E6C665] text-[#F5EFE6] hover:bg-[#E6C665] hover:text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all"
               >
                 Custom Cake Enquiry
               </a>
             </div>
 
-            <div className="pt-8 border-t border-[#EBE3D5] flex items-center justify-center lg:justify-start gap-8 text-xs text-[#736053]">
+            <div className="pt-8 border-t border-[#261D16] flex items-center justify-center lg:justify-start gap-8 text-xs text-[#A89889]">
               <div>
-                <span className="block font-bold text-[#1A1412] text-sm">100% Small Batch</span>
+                <span className="block font-bold text-[#F5EFE6] text-sm">100% Small Batch</span>
                 <span>Handcrafted Fresh</span>
               </div>
-              <div className="h-8 w-px bg-[#EBE3D5]"></div>
+              <div className="h-8 w-px bg-[#261D16]"></div>
               <div>
-                <span className="block font-bold text-[#1A1412] text-sm">Egg & Eggless</span>
+                <span className="block font-bold text-[#F5EFE6] text-sm">Egg & Eggless</span>
                 <span>Custom Options</span>
               </div>
-              <div className="h-8 w-px bg-[#EBE3D5]"></div>
+              <div className="h-8 w-px bg-[#261D16]"></div>
               <div>
-                <span className="block font-bold text-[#1A1412] text-sm">Direct Delivery</span>
+                <span className="block font-bold text-[#F5EFE6] text-sm">Direct Delivery</span>
                 <span>Doorstep Pickup</span>
               </div>
             </div>
@@ -551,7 +550,7 @@ export default function Home() {
           {/* Hero Image Showcase Grid */}
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group">
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg"
                   alt="Berry Crown Cupcakes Showcase"
@@ -559,11 +558,11 @@ export default function Home() {
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex items-end">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex items-end">
                   <span className="text-white text-xs font-semibold">Berry Crown Cupcakes</span>
                 </div>
               </div>
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-white group">
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group">
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg"
                   alt="Hazelnut Heaven Teacake"
@@ -574,7 +573,7 @@ export default function Home() {
             </div>
 
             <div className="pt-8 space-y-4">
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-white group">
+              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group">
                 <Image
                   src="/images (7).jpg"
                   alt="Biscoff Bliss Cheesecake Showcase"
@@ -583,7 +582,7 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white group">
+              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group">
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (22).jpeg"
                   alt="Blue Velvet Creamy Yogurt Showcase"
@@ -598,38 +597,38 @@ export default function Home() {
       </section>
 
       {/* Brand Story / About Us Section */}
-      <section id="about" className="py-24 bg-[#F5EFE4] border-b border-[#EBE3D5]">
+      <section id="about" className="py-24 bg-[#110D09] border-b border-[#261D16]">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
           
           <div className="inline-flex items-center gap-3">
-            <span className="h-px w-10 bg-[#D4AF37]"></span>
-            <span className="text-[#8C6D23] text-xs uppercase tracking-[0.3em] font-semibold">The Heart Behind Ozee&apos;s</span>
-            <span className="h-px w-10 bg-[#D4AF37]"></span>
+            <span className="h-px w-10 bg-[#E6C665]/50"></span>
+            <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">The Heart Behind Ozee&apos;s</span>
+            <span className="h-px w-10 bg-[#E6C665]/50"></span>
           </div>
 
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#1A1412]">
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
             Our Story & Passion
           </h2>
 
-          <div className="space-y-6 text-[#59483D] text-base sm:text-lg font-light leading-relaxed">
+          <div className="space-y-6 text-[#C7B7A7] text-base sm:text-lg font-light leading-relaxed">
             <p>
-              It all began with our little boy, lovingly called <span className="font-serif italic text-[#1A1412] font-semibold">&quot;Ozee.&quot;</span> His laughter, curiosity, and the simple joy he found in homemade treats became the spark behind a dream that slowly grew into <span className="font-semibold text-[#1A1412]">Ozee&apos;s</span>.
+              It all began with our little boy, lovingly called <span className="font-serif italic text-[#E6C665] font-semibold">&quot;Ozee.&quot;</span> His laughter, curiosity, and the simple joy he found in homemade treats became the spark behind a dream that slowly grew into <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>.
             </p>
             <p>
               As a mother, I discovered that the happiest moments in life are often the simplest — watching a cake rise in the oven, decorating cupcakes together, or sharing sweet treats around the table with family and friends. Those moments taught me that baking is more than recipes; it is a way of expressing love, creating memories, and bringing people together.
             </p>
             <div className="py-4">
-              <p className="font-serif text-2xl text-[#8C6D23] italic font-semibold">
+              <p className="font-serif text-2xl text-[#E6C665] italic font-semibold">
                 &ldquo;Then Ozee&apos;s came into being from that simple and true belief!!&rdquo;
               </p>
             </div>
             <p>
-              Inspired by the <span className="font-semibold text-[#1A1412]">Trident</span> in our logo — a symbol of strength, balance, and unwavering commitment — we craft every treat with equal devotion to purity, creativity, and care. At Ozee&apos;s, we don&apos;t just bake desserts; we create meaningful moments, one handcrafted bite at a time.
+              Inspired by the <span className="font-semibold text-[#F5EFE6]">Trident</span> in our logo — a symbol of strength, balance, and unwavering commitment — we craft every treat with equal devotion to purity, creativity, and care. At Ozee&apos;s, we don&apos;t just bake desserts; we create meaningful moments, one handcrafted bite at a time.
             </p>
           </div>
 
           <div className="pt-6">
-            <div className="relative aspect-[16/8] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="relative aspect-[16/8] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-[#2B2119]">
               <Image
                 src="/WhatsApp Image 2026-07-31 at 5.04.43 PM (2).jpeg"
                 alt="Ozee's Custom Cake Portfolio Showcase"
@@ -643,15 +642,15 @@ export default function Home() {
       </section>
 
       {/* Main Interactive Catalog Section */}
-      <section id="menu" className="py-24 border-b border-[#EBE3D5]">
+      <section id="menu" className="py-24 bg-[#0B0806] border-b border-[#261D16]">
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-            <span className="text-[#8C6D23] text-xs uppercase tracking-[0.3em] font-semibold">Handcrafted Catalogue</span>
-            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#1A1412]">
+            <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Handcrafted Catalogue</span>
+            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
               Our Artisanal Bake Collection
             </h2>
-            <p className="text-[#59483D] font-light text-base sm:text-lg">
+            <p className="text-[#C7B7A7] font-light text-base sm:text-lg">
               Explore our fresh small-batch cupcakes, teacakes, cookies, cheesecakes, donuts, yogurts, and custom celebration cakes.
             </p>
           </div>
@@ -664,30 +663,32 @@ export default function Home() {
                 onClick={() => setActiveCategory(cat)}
                 className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
                   activeCategory === cat
-                    ? "bg-[#1A1412] text-[#FFFDF9] shadow-lg scale-105"
-                    : "bg-[#F4ECDC]/70 hover:bg-[#EBE3D5] text-[#59483D]"
+                    ? "bg-[#E6C665] text-[#0B0806] font-bold shadow-lg shadow-[#E6C665]/25 scale-105"
+                    : "bg-[#18110D] border border-[#2B2018] text-[#C7B7A7] hover:border-[#E6C665] hover:text-[#E6C665]"
                 }`}
               >
                 {cat}
               </button>
             ))}
-               {/* Catalog Grid */}
+          </div>
+
+          {/* Catalog Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProducts.map((item) => (
               <ProductCard key={item.id} item={item} wa={wa} />
             ))}
-          </div>         </div>
+          </div>
 
         </div>
       </section>
 
       {/* Custom Cake Showcase Banner */}
-      <section className="py-20 bg-[#1A1412] text-[#FFFDF9]">
+      <section className="py-20 bg-[#16100B] text-[#F5EFE6] border-b border-[#261D16]">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           
-          <span className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-semibold">Bespoke Celebrations</span>
+          <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Bespoke Celebrations</span>
           <h2 className="font-serif text-4xl sm:text-5xl font-bold">Have a Custom Theme in Mind?</h2>
-          <p className="text-[#D4C4B7] font-light text-base sm:text-lg max-w-2xl mx-auto">
+          <p className="text-[#D6C7B8] font-light text-base sm:text-lg max-w-2xl mx-auto">
             From cricket pitch cakes to 3D cars, butterfly gardens, and elegant anniversary cakes — we turn your celebration ideas into edible art.
           </p>
 
@@ -696,7 +697,7 @@ export default function Home() {
               href={wa("Custom Celebration Cake")}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white px-9 py-4 rounded-full font-semibold shadow-xl hover:scale-105 transition-transform text-xs uppercase tracking-widest"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white px-9 py-4 rounded-full font-bold shadow-xl shadow-[#25D366]/20 hover:scale-105 transition-transform text-xs uppercase tracking-widest"
             >
               <span>Discuss Custom Cake on WhatsApp (+91 99009 51492)</span>
             </a>
@@ -706,54 +707,54 @@ export default function Home() {
       </section>
 
       {/* Ordering Process & Timelines */}
-      <section id="ordering" className="py-24 bg-[#F5EFE4] border-b border-[#EBE3D5]">
+      <section id="ordering" className="py-24 bg-[#110D09] border-b border-[#261D16]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-10 items-stretch">
             
-            <div className="lg:col-span-7 bg-white p-8 sm:p-12 rounded-3xl border border-[#EBE3D5] shadow-sm flex flex-col justify-between space-y-6">
+            <div className="lg:col-span-7 bg-[#18110D] p-8 sm:p-12 rounded-3xl border border-[#2B2018] shadow-sm flex flex-col justify-between space-y-6">
               <div>
-                <span className="text-[#8C6D23] text-xs uppercase tracking-[0.3em] font-semibold">Simple & Direct</span>
-                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#1A1412] mt-2 mb-6">How to Order from Ozee&apos;s</h2>
+                <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Simple & Direct</span>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F5EFE6] mt-2 mb-6">How to Order from Ozee&apos;s</h2>
 
-                <div className="space-y-4 text-sm text-[#59483D]">
+                <div className="space-y-4 text-sm text-[#C7B7A7]">
                   <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">1</span>
-                    <p><strong className="text-[#1A1412]">Browse & Select:</strong> Choose your favorite treats from our menu categories.</p>
+                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">1</span>
+                    <p><strong className="text-[#F5EFE6]">Browse & Select:</strong> Choose your favorite treats from our menu categories.</p>
                   </div>
                   <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">2</span>
-                    <p><strong className="text-[#1A1412]">Share Requirements:</strong> Send us product name, desired flavor, quantity, egg/eggless preference, and pickup date via WhatsApp.</p>
+                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">2</span>
+                    <p><strong className="text-[#F5EFE6]">Share Requirements:</strong> Send us product name, desired flavor, quantity, egg/eggless preference, and pickup date via WhatsApp.</p>
                   </div>
                   <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">3</span>
-                    <p><strong className="text-[#1A1412]">Order Confirmation:</strong> We confirm availability and share payment details.</p>
+                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">3</span>
+                    <p><strong className="text-[#F5EFE6]">Order Confirmation:</strong> We confirm availability and share payment details.</p>
                   </div>
                   <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#1A1412] text-[#D4AF37] text-xs flex items-center justify-center shrink-0 font-bold">4</span>
-                    <p><strong className="text-[#1A1412]">Fresh Small-Batch Baking:</strong> Your order is handcrafted fresh for your celebration day.</p>
+                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">4</span>
+                    <p><strong className="text-[#F5EFE6]">Fresh Small-Batch Baking:</strong> Your order is handcrafted fresh for your celebration day.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-[#18110D] text-[#FFFDF9] p-8 sm:p-12 rounded-3xl border border-[#2C1F18] flex flex-col justify-between space-y-6">
+            <div className="lg:col-span-5 bg-[#080604] text-[#F5EFE6] p-8 sm:p-12 rounded-3xl border border-[#2B2018] flex flex-col justify-between space-y-6">
               <div>
-                <span className="text-[#D4AF37] text-xs uppercase tracking-[0.3em] font-semibold">Advance Notice</span>
-                <h3 className="font-serif text-3xl font-bold text-[#FFFDF9] mt-2 mb-6">Order Timelines</h3>
-                <div className="space-y-4 text-sm text-[#E5D7BF]">
-                  <p>• <strong>Cupcakes, Cookies & Donuts:</strong> 24 – 36 hours notice</p>
-                  <p>• <strong>Teacakes & Creamy Yogurts:</strong> 24 – 48 hours notice</p>
-                  <p>• <strong>Cheesecakes & Dessert Jars:</strong> 48 – 72 hours notice</p>
-                  <p>• <strong>Custom Theme & Celebration Cakes:</strong> Contact in advance</p>
+                <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Advance Notice</span>
+                <h3 className="font-serif text-3xl font-bold text-[#F5EFE6] mt-2 mb-6">Order Timelines</h3>
+                <div className="space-y-4 text-sm text-[#C7B7A7]">
+                  <p>• <strong className="text-[#E6C665]">Cupcakes, Cookies & Donuts:</strong> 24 – 36 hours notice</p>
+                  <p>• <strong className="text-[#E6C665]">Teacakes & Creamy Yogurts:</strong> 24 – 48 hours notice</p>
+                  <p>• <strong className="text-[#E6C665]">Cheesecakes & Dessert Jars:</strong> 48 – 72 hours notice</p>
+                  <p>• <strong className="text-[#E6C665]">Custom Theme & Celebration Cakes:</strong> Contact in advance</p>
                 </div>
               </div>
 
-              <div className="pt-6 border-t border-[#362720] text-center">
+              <div className="pt-6 border-t border-[#261D16] text-center">
                 <a
                   href={wa()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-4 rounded-full text-xs uppercase tracking-widest font-semibold shadow-lg transition-all"
+                  className="block w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-4 rounded-full text-xs uppercase tracking-widest font-bold shadow-lg transition-all"
                 >
                   Order via WhatsApp (+91 99009 51492)
                 </a>
@@ -765,18 +766,18 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#100B08] text-[#FFFDF9] py-16">
+      <footer className="bg-[#050403] text-[#F5EFE6] py-16 border-t border-[#211811]">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           
           <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#D4AF37] flex items-center justify-center font-serif text-2xl font-bold mb-2 text-[#D4AF37]">
+            <div className="w-12 h-12 rounded-full border border-[#E6C665] flex items-center justify-center font-serif text-2xl font-bold mb-2 text-[#E6C665]">
               O
             </div>
-            <span className="font-serif text-3xl font-bold tracking-[0.2em] text-[#FFFDF9]">OZEE&apos;S</span>
-            <span className="text-[10px] uppercase tracking-[0.35em] text-[#D4AF37] font-semibold mt-1">Crafted with Love • Made Like Home</span>
+            <span className="font-serif text-3xl font-bold tracking-[0.2em] text-[#F5EFE6]">OZEE&apos;S</span>
+            <span className="text-[10px] uppercase tracking-[0.35em] text-[#E6C665] font-semibold mt-1">Crafted with Love • Made Like Home</span>
           </div>
 
-          <div className="pt-8 border-t border-[#2C1F18] text-xs text-[#9E8C80] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
             <p>© {new Date().getFullYear()} Ozee&apos;s Pâtisserie. All rights reserved.</p>
             <p>WhatsApp: +91 99009 51492 | www.ozees.in</p>
           </div>
@@ -787,3 +788,4 @@ export default function Home() {
     </div>
   );
 }
+
