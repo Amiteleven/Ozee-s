@@ -470,13 +470,17 @@ export default function Home() {
             </a>
           </nav>
 
-          {/* Brand Logo */}
-          <a href="#" className="flex flex-col items-center group">
-            <div className="w-10 h-10 rounded-full border border-[#E6C665] flex items-center justify-center font-serif text-xl font-bold text-[#F5EFE6] group-hover:bg-[#E6C665] group-hover:text-[#0B0806] transition-all duration-300 shadow-md">
+          {/* Brand Logo (Vibrant Metallic Golden) */}
+          <a href="#" className="flex flex-col items-center group transition-transform hover:scale-105">
+            <div className="w-11 h-11 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-2xl font-black shadow-lg shadow-[#E6C665]/30 flex items-center justify-center group-hover:rotate-6 transition-all duration-300">
               O
             </div>
-            <span className="font-serif text-xl font-bold tracking-[0.2em] text-[#F5EFE6] -mt-0.5">OZEE&apos;S</span>
-            <span className="text-[8px] uppercase tracking-[0.35em] text-[#E6C665] font-semibold -mt-1">Pâtisserie & Artisanal Bakes</span>
+            <span className="font-serif text-2xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-md -mt-0.5">
+              OZEE&apos;S
+            </span>
+            <span className="text-[8px] uppercase tracking-[0.38em] text-[#E6C665] font-bold -mt-1">
+              Pâtisserie & Artisanal Bakes
+            </span>
           </a>
 
           <div className="flex items-center gap-4">
@@ -769,12 +773,16 @@ export default function Home() {
       <footer className="bg-[#050403] text-[#F5EFE6] py-16 border-t border-[#211811]">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           
-          <div className="flex flex-col items-center">
-            <div className="w-12 h-12 rounded-full border border-[#E6C665] flex items-center justify-center font-serif text-2xl font-bold mb-2 text-[#E6C665]">
+          <div className="flex flex-col items-center group">
+            <div className="w-14 h-14 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-3xl font-black shadow-xl shadow-[#E6C665]/40 flex items-center justify-center mb-1.5">
               O
             </div>
-            <span className="font-serif text-3xl font-bold tracking-[0.2em] text-[#F5EFE6]">OZEE&apos;S</span>
-            <span className="text-[10px] uppercase tracking-[0.35em] text-[#E6C665] font-semibold mt-1">Crafted with Love • Made Like Home</span>
+            <span className="font-serif text-4xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-lg">
+              OZEE&apos;S
+            </span>
+            <span className="text-[10px] uppercase tracking-[0.38em] text-[#E6C665] font-bold mt-1">
+              Crafted with Love • Made Like Home
+            </span>
           </div>
 
           <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
