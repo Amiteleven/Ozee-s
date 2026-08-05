@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   title: "Ozee's | Crafted with Love, Made like Home",
   description: "At Ozee's, baking begins with purpose, passion, and purity. Inspired by the Trident in our logo - a symbol of strength, balance, and unwavering commitment.",
   icons: {
-    icon: "/icon.png",
-    apple: "/apple-icon.png",
+    icon: "/favicon.png",
+    apple: "/favicon.png",
   },
 };
 
