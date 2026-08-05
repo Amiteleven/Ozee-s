@@ -2,6 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FloatingParticles,
+  GoldShimmer,
+  AnimatedCounter,
+  StaggerFadeIn,
+  TextScramble,
+} from "./components/animations";
+
 
 function DietaryBadge({ type }: { type: "veg" | "egg" | "both" }) {
   if (type === "both") {
@@ -41,17 +50,25 @@ interface Product {
   tag?: string;
 }
 
-function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => string }) {
+function ProductCard({ item, wa, index = 0 }: { item: Product; wa: (name?: string) => string; index?: number }) {
   const [currentImg, setCurrentImg] = useState(item.img);
   const allImages = item.images && item.images.length > 0 ? item.images : [item.img];
 
   return (
-    <div className="bg-[#140F0C] rounded-3xl overflow-hidden border border-[#2B2119] shadow-lg hover:shadow-2xl hover:shadow-[#E6C665]/10 hover:border-[#E6C665]/50 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group">
-      {/* 1. HEADING ABOVE PICS (Dark Theme) */}
-      <div className="p-6 pb-4 border-b border-[#241A13] bg-[#1A140F]">
-        <div className="flex items-start justify-between gap-3">
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: (index % 3) * 0.1 }}
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className="bg-[#140F0C] rounded-3xl overflow-hidden border border-[#2B2119] shadow-lg hover:shadow-2xl hover:shadow-[#E6C665]/15 hover:border-[#E6C665]/60 flex flex-col justify-between group cursor-default"
+    >
+      {/* 1. HEADING ABOVE PICS */}
+      <div className="p-6 pb-4 border-b border-[#241A13] bg-[#1A140F] relative overflow-hidden">
+        <GoldShimmer />
+        <div className="flex items-start justify-between gap-3 relative z-10">
           <div>
-            <h3 className="font-serif text-xl font-bold text-[#F5EFE6] leading-snug group-hover:text-[#E6C665] transition-colors">{item.name}</h3>
+            <h3 className="font-serif text-xl font-bold text-[#F5EFE6] leading-snug group-hover:text-[#E6C665] transition-colors duration-300">{item.name}</h3>
             <span className="text-[10px] text-[#E6C665] font-semibold uppercase tracking-wider block mt-0.5">{item.category}</span>
           </div>
           <DietaryBadge type={item.diet} />
@@ -60,16 +77,34 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
 
       {/* 2. PICS BELOW HEADING */}
       <div className="relative aspect-[4/3] bg-[#0A0705] overflow-hidden">
-        <Image
-          src={currentImg}
-          alt={item.name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-700"
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentImg}
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.45, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={currentImg}
+              alt={item.name}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </motion.div>
+        </AnimatePresence>
+        {/* Gradient overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         {item.tag && (
-          <span className="absolute top-3 left-3 bg-[#E6C665] text-[#0B0806] text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-md z-10">
+          <motion.span
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="absolute top-3 left-3 bg-gradient-to-r from-[#F7DC8D] to-[#D4AF37] text-[#0B0806] text-[10px] uppercase tracking-wider font-black px-3 py-1 rounded-full shadow-lg z-10"
+          >
             {item.tag}
-          </span>
+          </motion.span>
         )}
       </div>
 
@@ -78,37 +113,42 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
         <div className="flex gap-2 px-4 py-2.5 bg-[#18110D] border-b border-[#291F17] items-center">
           <span className="text-[9px] uppercase tracking-wider text-[#E6C665] font-bold mr-1">Views:</span>
           {allImages.map((imgUrl, idx) => (
-            <button
+            <motion.button
               key={idx}
+              whileTap={{ scale: 0.9 }}
+              whileHover={{ scale: 1.1 }}
               onClick={() => setCurrentImg(imgUrl)}
               className={`relative w-10 h-10 rounded-lg overflow-hidden border-2 transition-all shrink-0 ${
-                currentImg === imgUrl ? "border-[#E6C665] scale-105 shadow-md ring-2 ring-[#E6C665]/30" : "border-[#33261C] opacity-60 hover:opacity-100"
+                currentImg === imgUrl ? "border-[#E6C665] shadow-md ring-2 ring-[#E6C665]/30" : "border-[#33261C] opacity-60 hover:opacity-100"
               }`}
             >
               <Image src={imgUrl} alt={`${item.name} photo ${idx + 1}`} fill className="object-cover" />
-            </button>
+            </motion.button>
           ))}
         </div>
       )}
 
-      {/* 3. DETAILS & ORDER BUTTON BELOW PICS */}
+      {/* 3. DETAILS & ORDER BUTTON */}
       <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
         <div className="space-y-3">
           <p className="text-xs text-[#D6C7B8] font-light leading-relaxed">{item.desc}</p>
-
           {item.flavors && item.flavors.length > 0 && (
             <div className="pt-2">
               <span className="text-[10px] uppercase tracking-wider font-semibold text-[#E6C665] block mb-1.5">
                 Flavors / Varieties:
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {item.flavors.map((flv) => (
-                  <span
+                {item.flavors.map((flv, fi) => (
+                  <motion.span
                     key={flv}
+                    initial={{ opacity: 0, scale: 0.85 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: fi * 0.04 }}
                     className="bg-[#241B14] text-[#E5D6C5] border border-[#3D2F23] text-[10px] px-2.5 py-1 rounded-full font-medium"
                   >
                     {flv}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </div>
@@ -119,17 +159,19 @@ function ProductCard({ item, wa }: { item: Product; wa: (name?: string) => strin
           <span className="text-[10px] text-[#E6C665] font-semibold uppercase tracking-wider">
             {item.diet === "both" ? "Egg & Eggless Options" : item.diet === "veg" ? "100% Eggless" : "Contains Egg"}
           </span>
-          <a
+          <motion.a
             href={wa(item.name)}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs bg-[#E6C665] hover:bg-[#D4AF37] text-[#0B0806] font-bold px-6 py-2.5 rounded-full uppercase tracking-wider transition-all shadow-md shadow-[#E6C665]/20 hover:scale-105"
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.95 }}
+            className="text-xs bg-gradient-to-r from-[#F7DC8D] via-[#E6C665] to-[#D4AF37] text-[#0B0806] font-black px-6 py-2.5 rounded-full uppercase tracking-wider transition-all shadow-lg shadow-[#E6C665]/25"
           >
             Order
-          </a>
+          </motion.a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
@@ -446,9 +488,24 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#0B0806] text-[#F5EFE6] font-sans selection:bg-[#E6C665]/30">
 
-      {/* Top Banner */}
-      <div className="bg-[#050403] text-[#E6C665] text-[11px] uppercase tracking-[0.25em] font-medium py-2.5 px-4 text-center border-b border-[#211811]">
-        <span>✦ Handcrafted Small-Batch Bakery • Made Fresh Like Home • Order via WhatsApp: +91 99009 51492 ✦</span>
+      {/* Top Banner — Marquee */}
+      <div className="bg-[#050403] text-[#E6C665] text-[11px] uppercase tracking-[0.25em] font-medium py-2.5 border-b border-[#211811] overflow-hidden">
+        <motion.div
+          className="flex gap-12 whitespace-nowrap"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+        >
+          {[0, 1].map((i) => (
+            <span key={i} className="flex gap-12 shrink-0">
+              <span>✦ Handcrafted Small-Batch Bakery</span>
+              <span>✦ Made Fresh Like Home</span>
+              <span>✦ Egg & Eggless Options Available</span>
+              <span>✦ Custom Celebration Cakes</span>
+              <span>✦ WhatsApp: +91 99009 51492</span>
+              <span>✦ www.ozees.in</span>
+            </span>
+          ))}
+        </motion.div>
       </div>
 
       {/* Luxury Sticky Header (Dark Obsidian Glass) */}
@@ -497,103 +554,156 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Showcase Section (Luxury Dark Gradient) */}
+      {/* Hero Showcase Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden border-b border-[#261D16] bg-gradient-to-b from-[#090705] via-[#0F0B08] to-[#15100B]">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center">
+        {/* Floating ambient particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          <FloatingParticles count={6} color="#E6C665" />
+          {/* Radial glow */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-[#E6C665]/3 blur-[120px] pointer-events-none" />
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
           
           <div className="lg:col-span-6 space-y-8 text-center lg:text-left">
-            <div className="inline-flex items-center gap-3 bg-[#1D150E] border border-[#3B2B1D] px-4 py-1.5 rounded-full">
-              <span className="w-2 h-2 rounded-full bg-[#E6C665] animate-pulse"></span>
-              <span className="text-[#E6C665] text-xs font-semibold uppercase tracking-[0.25em]">Artisanal Homemade Bakery</span>
+            <StaggerFadeIn delay={0}>
+              <div className="inline-flex items-center gap-3 bg-[#1D150E] border border-[#3B2B1D] px-4 py-1.5 rounded-full">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E6C665] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#E6C665]"></span>
+                </span>
+                <span className="text-[#E6C665] text-xs font-semibold uppercase tracking-[0.25em]">Artisanal Homemade Bakery</span>
+              </div>
+            </StaggerFadeIn>
+
+            <div>
+              <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F5EFE6] leading-[1.08] tracking-tight">
+                <TextScramble text="Crafted with Love." />
+                <br />
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                  className="italic font-normal text-[#E6C665]"
+                >
+                  Made Like Home.
+                </motion.span>
+              </h1>
             </div>
 
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F5EFE6] leading-[1.08] tracking-tight">
-              Crafted with Love.<br />
-              <span className="italic font-normal text-[#E6C665]">Made Like Home.</span>
-            </h1>
+            <StaggerFadeIn delay={0.5}>
+              <p className="text-base sm:text-lg text-[#C7B7A7] font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
+                Welcome to <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>. Every cupcake, teacake, cookie, cheesecake, donut, and creamy yogurt is handcrafted in small batches using pure, premium ingredients.
+              </p>
+            </StaggerFadeIn>
 
-            <p className="text-base sm:text-lg text-[#C7B7A7] font-light leading-relaxed max-w-xl mx-auto lg:mx-0">
-              Welcome to <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>. Every cupcake, teacake, cookie, cheesecake, donut, and creamy yogurt is handcrafted in small batches using pure, premium ingredients.
-            </p>
+            <StaggerFadeIn delay={0.65}>
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                <motion.a
+                  href="#menu"
+                  whileHover={{ scale: 1.07 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="bg-gradient-to-r from-[#F7DC8D] via-[#E6C665] to-[#D4AF37] text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-black transition-all shadow-xl shadow-[#E6C665]/25"
+                >
+                  Explore Menu Collection
+                </motion.a>
+                <motion.a
+                  href={wa("Custom Celebration Cake")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.07 }}
+                  whileTap={{ scale: 0.96 }}
+                  className="border border-[#E6C665]/70 text-[#F5EFE6] hover:bg-[#E6C665] hover:text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all"
+                >
+                  Custom Cake Enquiry
+                </motion.a>
+              </div>
+            </StaggerFadeIn>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
-              <a
-                href="#menu"
-                className="bg-[#E6C665] hover:bg-[#D4AF37] text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-bold transition-all shadow-xl shadow-[#E6C665]/15 hover:scale-105"
-              >
-                Explore Menu Collection
-              </a>
-              <a
-                href={wa("Custom Celebration Cake")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="border border-[#E6C665] text-[#F5EFE6] hover:bg-[#E6C665] hover:text-[#0B0806] px-8 py-4 rounded-full text-xs uppercase tracking-[0.2em] font-semibold transition-all"
-              >
-                Custom Cake Enquiry
-              </a>
-            </div>
-
-            <div className="pt-8 border-t border-[#261D16] flex items-center justify-center lg:justify-start gap-8 text-xs text-[#A89889]">
-              <div>
-                <span className="block font-bold text-[#F5EFE6] text-sm">100% Small Batch</span>
-                <span>Handcrafted Fresh</span>
+            <StaggerFadeIn delay={0.8}>
+              <div className="pt-8 border-t border-[#261D16] flex items-center justify-center lg:justify-start gap-8 text-xs text-[#A89889]">
+                <div className="text-center">
+                  <span className="block font-bold text-[#F5EFE6] text-lg"><AnimatedCounter end={100} suffix="%" /></span>
+                  <span>Small Batch</span>
+                </div>
+                <div className="h-8 w-px bg-[#261D16]"></div>
+                <div className="text-center">
+                  <span className="block font-bold text-[#F5EFE6] text-lg"><AnimatedCounter end={7} suffix="+" /></span>
+                  <span>Bake Categories</span>
+                </div>
+                <div className="h-8 w-px bg-[#261D16]"></div>
+                <div className="text-center">
+                  <span className="block font-bold text-[#F5EFE6] text-lg"><AnimatedCounter end={500} suffix="+" /></span>
+                  <span>Happy Customers</span>
+                </div>
               </div>
-              <div className="h-8 w-px bg-[#261D16]"></div>
-              <div>
-                <span className="block font-bold text-[#F5EFE6] text-sm">Egg & Eggless</span>
-                <span>Custom Options</span>
-              </div>
-              <div className="h-8 w-px bg-[#261D16]"></div>
-              <div>
-                <span className="block font-bold text-[#F5EFE6] text-sm">Direct Delivery</span>
-                <span>Doorstep Pickup</span>
-              </div>
-            </div>
+            </StaggerFadeIn>
           </div>
 
           {/* Hero Image Showcase Grid */}
           <div className="lg:col-span-6 grid grid-cols-2 gap-4">
             <div className="space-y-4">
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group">
+              <motion.div
+                initial={{ opacity: 0, y: 60, rotate: -2 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group"
+              >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg"
                   alt="Berry Crown Cupcakes Showcase"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex items-end">
-                  <span className="text-white text-xs font-semibold">Berry Crown Cupcakes</span>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-4 flex items-end">
+                  <span className="text-white text-xs font-semibold tracking-wider uppercase">Berry Crown Cupcakes</span>
                 </div>
-              </div>
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group">
+                <div className="absolute inset-0 ring-inset ring-2 ring-[#E6C665]/0 group-hover:ring-[#E6C665]/30 rounded-3xl transition-all duration-500" />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 60, rotate: -1 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{ duration: 0.9, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
+                className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group"
+              >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg"
                   alt="Hazelnut Heaven Teacake"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-              </div>
+              </motion.div>
             </div>
 
             <div className="pt-8 space-y-4">
-              <div className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group">
+              <motion.div
+                initial={{ opacity: 0, y: 80, rotate: 1 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="relative aspect-square rounded-3xl overflow-hidden shadow-xl border-4 border-[#241A13] group"
+              >
                 <Image
                   src="/images (7).jpg"
                   alt="Biscoff Bliss Cheesecake Showcase"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                   priority
                 />
-              </div>
-              <div className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 80, rotate: 2 }}
+                animate={{ opacity: 1, y: 0, rotate: 0 }}
+                transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+                className="relative aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-[#241A13] group"
+              >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (22).jpeg"
                   alt="Blue Velvet Creamy Yogurt Showcase"
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
-              </div>
+              </motion.div>
             </div>
           </div>
 
@@ -601,55 +711,90 @@ export default function Home() {
       </section>
 
       {/* Brand Story / About Us Section */}
-      <section id="about" className="py-24 bg-[#110D09] border-b border-[#261D16]">
-        <div className="max-w-4xl mx-auto px-6 text-center space-y-8">
+      <section id="about" className="py-24 bg-[#110D09] border-b border-[#261D16] relative overflow-hidden">
+        {/* Background accent */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#E6C665]/4 blur-[100px]" />
+          <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full bg-[#E6C665]/4 blur-[100px]" />
+        </div>
+        <div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
           
-          <div className="inline-flex items-center gap-3">
-            <span className="h-px w-10 bg-[#E6C665]/50"></span>
-            <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">The Heart Behind Ozee&apos;s</span>
-            <span className="h-px w-10 bg-[#E6C665]/50"></span>
-          </div>
-
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
-            Our Story & Passion
-          </h2>
-
-          <div className="space-y-6 text-[#C7B7A7] text-base sm:text-lg font-light leading-relaxed">
-            <p>
-              It all began with our little boy, lovingly called <span className="font-serif italic text-[#E6C665] font-semibold">&quot;Ozee.&quot;</span> His laughter, curiosity, and the simple joy he found in homemade treats became the spark behind a dream that slowly grew into <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>.
-            </p>
-            <p>
-              As a mother, I discovered that the happiest moments in life are often the simplest — watching a cake rise in the oven, decorating cupcakes together, or sharing sweet treats around the table with family and friends. Those moments taught me that baking is more than recipes; it is a way of expressing love, creating memories, and bringing people together.
-            </p>
-            <div className="py-4">
-              <p className="font-serif text-2xl text-[#E6C665] italic font-semibold">
-                &ldquo;Then Ozee&apos;s came into being from that simple and true belief!!&rdquo;
-              </p>
-            </div>
-            <p>
-              Inspired by the <span className="font-semibold text-[#F5EFE6]">Trident</span> in our logo — a symbol of strength, balance, and unwavering commitment — we craft every treat with equal devotion to purity, creativity, and care. At Ozee&apos;s, we don&apos;t just bake desserts; we create meaningful moments, one handcrafted bite at a time.
-            </p>
-          </div>
-
-          <div className="pt-6">
-            <div className="relative aspect-[16/8] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-[#2B2119]">
-              <Image
-                src="/WhatsApp Image 2026-07-31 at 5.04.43 PM (2).jpeg"
-                alt="Ozee's Custom Cake Portfolio Showcase"
-                fill
-                className="object-cover"
+          <StaggerFadeIn delay={0}>
+            <div className="inline-flex items-center gap-3">
+              <motion.span
+                className="h-px bg-[#E6C665]/50"
+                initial={{ width: 0 }}
+                whileInView={{ width: 40 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              />
+              <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">The Heart Behind Ozee&apos;s</span>
+              <motion.span
+                className="h-px bg-[#E6C665]/50"
+                initial={{ width: 0 }}
+                whileInView={{ width: 40 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               />
             </div>
+          </StaggerFadeIn>
+
+          <StaggerFadeIn delay={0.1}>
+            <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
+              Our Story & Passion
+            </h2>
+          </StaggerFadeIn>
+
+          <div className="space-y-6 text-[#C7B7A7] text-base sm:text-lg font-light leading-relaxed">
+            <StaggerFadeIn delay={0}>
+              <p>
+                It all began with our little boy, lovingly called <span className="font-serif italic text-[#E6C665] font-semibold">&quot;Ozee.&quot;</span> His laughter, curiosity, and the simple joy he found in homemade treats became the spark behind a dream that slowly grew into <span className="font-semibold text-[#F5EFE6]">Ozee&apos;s</span>.
+              </p>
+            </StaggerFadeIn>
+            <StaggerFadeIn delay={0.1}>
+              <p>
+                As a mother, I discovered that the happiest moments in life are often the simplest — watching a cake rise in the oven, decorating cupcakes together, or sharing sweet treats around the table with family and friends. Those moments taught me that baking is more than recipes; it is a way of expressing love, creating memories, and bringing people together.
+              </p>
+            </StaggerFadeIn>
+            <StaggerFadeIn delay={0.2}>
+              <div className="py-4">
+                <p className="font-serif text-2xl text-[#E6C665] italic font-semibold">
+                  &ldquo;Then Ozee&apos;s came into being from that simple and true belief!!&rdquo;
+                </p>
+              </div>
+            </StaggerFadeIn>
+            <StaggerFadeIn delay={0.3}>
+              <p>
+                Inspired by the <span className="font-semibold text-[#F5EFE6]">Trident</span> in our logo — a symbol of strength, balance, and unwavering commitment — we craft every treat with equal devotion to purity, creativity, and care. At Ozee&apos;s, we don&apos;t just bake desserts; we create meaningful moments, one handcrafted bite at a time.
+              </p>
+            </StaggerFadeIn>
           </div>
+
+          <StaggerFadeIn delay={0.2} scale={true}>
+            <div className="pt-6">
+              <div className="relative aspect-[16/8] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-[#2B2119] group">
+                <Image
+                  src="/WhatsApp Image 2026-07-31 at 5.04.43 PM (2).jpeg"
+                  alt="Ozee's Custom Cake Portfolio Showcase"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <GoldShimmer />
+              </div>
+            </div>
+          </StaggerFadeIn>
 
         </div>
       </section>
 
       {/* Main Interactive Catalog Section */}
-      <section id="menu" className="py-24 bg-[#0B0806] border-b border-[#261D16]">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="menu" className="py-24 bg-[#0B0806] border-b border-[#261D16] relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <FloatingParticles count={3} color="#E6C665" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           
-          <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
+          <StaggerFadeIn className="text-center max-w-3xl mx-auto space-y-4 mb-12">
             <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Handcrafted Catalogue</span>
             <h2 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
               Our Artisanal Bake Collection
@@ -657,113 +802,161 @@ export default function Home() {
             <p className="text-[#C7B7A7] font-light text-base sm:text-lg">
               Explore our fresh small-batch cupcakes, teacakes, cookies, cheesecakes, donuts, yogurts, and custom celebration cakes.
             </p>
-          </div>
+          </StaggerFadeIn>
 
           {/* Interactive Category Filter Bar */}
-          <div className="flex items-center justify-center flex-wrap gap-2 mb-16">
+          <StaggerFadeIn delay={0.1} className="flex items-center justify-center flex-wrap gap-2 mb-16">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
+                layout
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-300 ${
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-5 py-2.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-colors duration-200 relative overflow-hidden ${
                   activeCategory === cat
-                    ? "bg-[#E6C665] text-[#0B0806] font-bold shadow-lg shadow-[#E6C665]/25 scale-105"
-                    : "bg-[#18110D] border border-[#2B2018] text-[#C7B7A7] hover:border-[#E6C665] hover:text-[#E6C665]"
+                    ? "bg-gradient-to-r from-[#F7DC8D] via-[#E6C665] to-[#D4AF37] text-[#0B0806] font-black shadow-lg shadow-[#E6C665]/30"
+                    : "bg-[#18110D] border border-[#2B2018] text-[#C7B7A7] hover:border-[#E6C665]/60 hover:text-[#E6C665]"
                 }`}
               >
-                {cat}
-              </button>
+                {activeCategory === cat && (
+                  <motion.span
+                    layoutId="activeCategory"
+                    className="absolute inset-0 bg-gradient-to-r from-[#F7DC8D] via-[#E6C665] to-[#D4AF37] rounded-full"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </motion.button>
             ))}
-          </div>
+          </StaggerFadeIn>
 
           {/* Catalog Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map((item) => (
-              <ProductCard key={item.id} item={item} wa={wa} />
-            ))}
-          </div>
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={activeCategory}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {filteredProducts.map((item, i) => (
+                <ProductCard key={item.id} item={item} wa={wa} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
 
         </div>
       </section>
 
       {/* Custom Cake Showcase Banner */}
-      <section className="py-20 bg-[#16100B] text-[#F5EFE6] border-b border-[#261D16]">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
+      <section className="py-20 bg-[#16100B] text-[#F5EFE6] border-b border-[#261D16] relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[2px] bg-gradient-to-r from-transparent via-[#E6C665]/30 to-transparent" />
+          <FloatingParticles count={2} color="#E6C665" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 text-center space-y-8 relative z-10">
           
-          <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Bespoke Celebrations</span>
-          <h2 className="font-serif text-4xl sm:text-5xl font-bold">Have a Custom Theme in Mind?</h2>
-          <p className="text-[#D6C7B8] font-light text-base sm:text-lg max-w-2xl mx-auto">
-            From cricket pitch cakes to 3D cars, butterfly gardens, and elegant anniversary cakes — we turn your celebration ideas into edible art.
-          </p>
+          <StaggerFadeIn>
+            <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Bespoke Celebrations</span>
+            <h2 className="font-serif text-4xl sm:text-5xl font-bold mt-2">Have a Custom Theme in Mind?</h2>
+          </StaggerFadeIn>
+          <StaggerFadeIn delay={0.15}>
+            <p className="text-[#D6C7B8] font-light text-base sm:text-lg max-w-2xl mx-auto">
+              From cricket pitch cakes to 3D cars, butterfly gardens, and elegant anniversary cakes — we turn your celebration ideas into edible art.
+            </p>
+          </StaggerFadeIn>
 
-          <div className="pt-4">
-            <a
-              href={wa("Custom Celebration Cake")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba59] text-white px-9 py-4 rounded-full font-bold shadow-xl shadow-[#25D366]/20 hover:scale-105 transition-transform text-xs uppercase tracking-widest"
-            >
-              <span>Discuss Custom Cake on WhatsApp (+91 99009 51492)</span>
-            </a>
-          </div>
+          <StaggerFadeIn delay={0.3}>
+            <div className="pt-4">
+              <motion.a
+                href={wa("Custom Celebration Cake")}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.07 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-3 bg-[#25D366] text-white px-9 py-4 rounded-full font-bold shadow-xl shadow-[#25D366]/25 text-xs uppercase tracking-widest"
+              >
+                <span>Discuss Custom Cake on WhatsApp (+91 99009 51492)</span>
+              </motion.a>
+            </div>
+          </StaggerFadeIn>
 
         </div>
       </section>
 
       {/* Ordering Process & Timelines */}
-      <section id="ordering" className="py-24 bg-[#110D09] border-b border-[#261D16]">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="ordering" className="py-24 bg-[#110D09] border-b border-[#261D16] relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute -bottom-40 left-0 w-72 h-72 rounded-full bg-[#E6C665]/4 blur-[80px]" />
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid lg:grid-cols-12 gap-10 items-stretch">
             
-            <div className="lg:col-span-7 bg-[#18110D] p-8 sm:p-12 rounded-3xl border border-[#2B2018] shadow-sm flex flex-col justify-between space-y-6">
-              <div>
-                <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Simple & Direct</span>
-                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F5EFE6] mt-2 mb-6">How to Order from Ozee&apos;s</h2>
+            <StaggerFadeIn delay={0} className="lg:col-span-7">
+              <div className="bg-[#18110D] p-8 sm:p-12 rounded-3xl border border-[#2B2018] shadow-sm flex flex-col justify-between space-y-6 h-full">
+                <div>
+                  <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Simple & Direct</span>
+                  <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F5EFE6] mt-2 mb-6">How to Order from Ozee&apos;s</h2>
 
-                <div className="space-y-4 text-sm text-[#C7B7A7]">
-                  <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">1</span>
-                    <p><strong className="text-[#F5EFE6]">Browse & Select:</strong> Choose your favorite treats from our menu categories.</p>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">2</span>
-                    <p><strong className="text-[#F5EFE6]">Share Requirements:</strong> Send us product name, desired flavor, quantity, egg/eggless preference, and pickup date via WhatsApp.</p>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">3</span>
-                    <p><strong className="text-[#F5EFE6]">Order Confirmation:</strong> We confirm availability and share payment details.</p>
-                  </div>
-                  <div className="flex gap-4 items-start">
-                    <span className="w-7 h-7 rounded-full bg-[#E6C665] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-bold">4</span>
-                    <p><strong className="text-[#F5EFE6]">Fresh Small-Batch Baking:</strong> Your order is handcrafted fresh for your celebration day.</p>
+                  <div className="space-y-4 text-sm text-[#C7B7A7]">
+                    {[
+                      { n: 1, title: "Browse & Select:", desc: "Choose your favorite treats from our menu categories." },
+                      { n: 2, title: "Share Requirements:", desc: "Send us product name, desired flavor, quantity, egg/eggless preference, and pickup date via WhatsApp." },
+                      { n: 3, title: "Order Confirmation:", desc: "We confirm availability and share payment details." },
+                      { n: 4, title: "Fresh Small-Batch Baking:", desc: "Your order is handcrafted fresh for your celebration day." },
+                    ].map((step, idx) => (
+                      <StaggerFadeIn key={step.n} delay={idx * 0.1}>
+                        <div className="flex gap-4 items-start">
+                          <motion.span
+                            whileHover={{ scale: 1.15, rotate: 5 }}
+                            className="w-7 h-7 rounded-full bg-gradient-to-br from-[#F7DC8D] to-[#D4AF37] text-[#0B0806] text-xs flex items-center justify-center shrink-0 font-black shadow-md"
+                          >
+                            {step.n}
+                          </motion.span>
+                          <p><strong className="text-[#F5EFE6]">{step.title}</strong> {step.desc}</p>
+                        </div>
+                      </StaggerFadeIn>
+                    ))}
                   </div>
                 </div>
               </div>
-            </div>
+            </StaggerFadeIn>
 
-            <div className="lg:col-span-5 bg-[#080604] text-[#F5EFE6] p-8 sm:p-12 rounded-3xl border border-[#2B2018] flex flex-col justify-between space-y-6">
-              <div>
-                <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Advance Notice</span>
-                <h3 className="font-serif text-3xl font-bold text-[#F5EFE6] mt-2 mb-6">Order Timelines</h3>
-                <div className="space-y-4 text-sm text-[#C7B7A7]">
-                  <p>• <strong className="text-[#E6C665]">Cupcakes, Cookies & Donuts:</strong> 24 – 36 hours notice</p>
-                  <p>• <strong className="text-[#E6C665]">Teacakes & Creamy Yogurts:</strong> 24 – 48 hours notice</p>
-                  <p>• <strong className="text-[#E6C665]">Cheesecakes & Dessert Jars:</strong> 48 – 72 hours notice</p>
-                  <p>• <strong className="text-[#E6C665]">Custom Theme & Celebration Cakes:</strong> Contact in advance</p>
+            <StaggerFadeIn delay={0.15} className="lg:col-span-5">
+              <div className="bg-[#080604] text-[#F5EFE6] p-8 sm:p-12 rounded-3xl border border-[#2B2018] flex flex-col justify-between space-y-6 h-full">
+                <div>
+                  <span className="text-[#E6C665] text-xs uppercase tracking-[0.3em] font-semibold">Advance Notice</span>
+                  <h3 className="font-serif text-3xl font-bold text-[#F5EFE6] mt-2 mb-6">Order Timelines</h3>
+                  <div className="space-y-4 text-sm text-[#C7B7A7]">
+                    {[
+                      { label: "Cupcakes, Cookies & Donuts:", time: "24 – 36 hours notice" },
+                      { label: "Teacakes & Creamy Yogurts:", time: "24 – 48 hours notice" },
+                      { label: "Cheesecakes & Dessert Jars:", time: "48 – 72 hours notice" },
+                      { label: "Custom Theme & Celebration Cakes:", time: "Contact in advance" },
+                    ].map((item, idx) => (
+                      <StaggerFadeIn key={item.label} delay={idx * 0.1}>
+                        <p>• <strong className="text-[#E6C665]">{item.label}</strong> {item.time}</p>
+                      </StaggerFadeIn>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-[#261D16] text-center">
+                  <motion.a
+                    href={wa()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="block w-full bg-[#25D366] text-white py-4 rounded-full text-xs uppercase tracking-widest font-bold shadow-lg"
+                  >
+                    Order via WhatsApp (+91 99009 51492)
+                  </motion.a>
                 </div>
               </div>
-
-              <div className="pt-6 border-t border-[#261D16] text-center">
-                <a
-                  href={wa()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-4 rounded-full text-xs uppercase tracking-widest font-bold shadow-lg transition-all"
-                >
-                  Order via WhatsApp (+91 99009 51492)
-                </a>
-              </div>
-            </div>
+            </StaggerFadeIn>
 
           </div>
         </div>
@@ -773,22 +966,34 @@ export default function Home() {
       <footer className="bg-[#050403] text-[#F5EFE6] py-16 border-t border-[#211811]">
         <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
           
-          <div className="flex flex-col items-center group">
-            <div className="w-14 h-14 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-3xl font-black shadow-xl shadow-[#E6C665]/40 flex items-center justify-center mb-1.5">
-              O
-            </div>
-            <span className="font-serif text-4xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-lg">
-              OZEE&apos;S
-            </span>
-            <span className="text-[10px] uppercase tracking-[0.38em] text-[#E6C665] font-bold mt-1">
-              Crafted with Love • Made Like Home
-            </span>
-          </div>
+          <StaggerFadeIn>
+            <motion.div
+              className="flex flex-col items-center group"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.3 }}
+            >
+              <motion.div
+                whileHover={{ rotate: 10 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="w-14 h-14 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-3xl font-black shadow-xl shadow-[#E6C665]/40 flex items-center justify-center mb-1.5"
+              >
+                O
+              </motion.div>
+              <span className="font-serif text-4xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-lg">
+                OZEE&apos;S
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.38em] text-[#E6C665] font-bold mt-1">
+                Crafted with Love • Made Like Home
+              </span>
+            </motion.div>
+          </StaggerFadeIn>
 
-          <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>© {new Date().getFullYear()} Ozee&apos;s Pâtisserie. All rights reserved.</p>
-            <p>WhatsApp: +91 99009 51492 | www.ozees.in</p>
-          </div>
+          <StaggerFadeIn delay={0.2} yOffset={20}>
+            <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p>© {new Date().getFullYear()} Ozee&apos;s Pâtisserie. All rights reserved.</p>
+              <p>WhatsApp: +91 99009 51492 | www.ozees.in</p>
+            </div>
+          </StaggerFadeIn>
 
         </div>
       </footer>
