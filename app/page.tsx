@@ -585,7 +585,6 @@ export default function Home() {
                 >
                   Crafted with Love.
                 </motion.span>
-                <br />
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
