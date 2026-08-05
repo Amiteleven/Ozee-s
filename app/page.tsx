@@ -8,7 +8,6 @@ import {
   GoldShimmer,
   AnimatedCounter,
   StaggerFadeIn,
-  TextScramble,
 } from "./components/animations";
 
 
@@ -578,12 +577,19 @@ export default function Home() {
 
             <div>
               <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-[#F5EFE6] leading-[1.08] tracking-tight">
-                <TextScramble text="Crafted with Love." />
+                <motion.span
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="block"
+                >
+                  Crafted with Love.
+                </motion.span>
                 <br />
                 <motion.span
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="italic font-normal text-[#E6C665]"
                 >
                   Made Like Home.
