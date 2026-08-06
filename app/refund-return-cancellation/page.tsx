@@ -8,7 +8,7 @@ export default function RefundReturnCancellation() {
       <div className="max-w-3xl mx-auto px-6 py-24 space-y-10">
         <StaggerFadeIn>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
-            Refund, Return and Cancellation
+            Refund, Returns and Cancellation
           </h1>
           <p className="text-[#E6C665] text-sm uppercase tracking-[0.2em] font-semibold">
             Effective Date: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
@@ -16,30 +16,49 @@ export default function RefundReturnCancellation() {
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.1}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Cancellations</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Orders may be cancelled up to 24 hours before the scheduled pickup or delivery time for a full refund. Cancellations within 24 hours are non-refundable.
+            Because all products are freshly made to order, cancellations and refunds are limited.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.2}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Customized Orders</h2>
+          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Cancellation</h2>
+          <h3 className="font-serif text-xl font-bold text-[#F5EFE6] mt-4">Standard Orders</h3>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Personalized and custom-themed cakes cannot be returned, exchanged, or refunded once baking has started, as they are made to order and cannot be resold.
+            Orders may be cancelled up to 24 hours before the scheduled preparation begins. Any advance paid may be adjusted or refunded at Ozee&apos;s discretion.
+          </p>
+          <h3 className="font-serif text-xl font-bold text-[#F5EFE6] mt-4">Celebration and Customized Cakes</h3>
+          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
+            Customized cakes require significant preparation and planning. Once preparation has started, cancellation requests cannot be accommodated.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.3}>
           <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Refunds</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Refunds will be processed within 7-10 business days back to the original payment method. If payment was made via WhatsApp/UPI, refunds will be initiated to the same account details provided.
+            Refunds will be considered only if:
+          </p>
+          <ul className="list-disc list-inside text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed space-y-2">
+            <li>Ozee&apos;s is unable to fulfil the order.</li>
+            <li>An incorrect product was delivered.</li>
+            <li>The product was significantly damaged during delivery.</li>
+          </ul>
+          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
+            Refunds, where applicable, will be processed within 5–7 business days.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.4}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Quality Issues</h2>
+          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Returns</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            If you receive a damaged or incorrect order, please contact us within 24 hours with photos. We will review and offer a replacement or partial/ full refund at our discretion.
+            Since all products are perishable food items:
+          </p>
+          <ul className="list-disc list-inside text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed space-y-2">
+            <li>Returns are not accepted.</li>
+            <li>Exchanges are not available.</li>
+          </ul>
+          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
+            If there is an issue with your order, please contact us within 2 hours of delivery or pickup with photographs, and we will review the matter promptly.
           </p>
         </StaggerFadeIn>
 

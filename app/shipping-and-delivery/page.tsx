@@ -8,7 +8,7 @@ export default function ShippingAndDelivery() {
       <div className="max-w-3xl mx-auto px-6 py-24 space-y-10">
         <StaggerFadeIn>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
-            Shipping and Delivery
+            Shipping and Delivery Policy
           </h1>
           <p className="text-[#E6C665] text-sm uppercase tracking-[0.2em] font-semibold">
             Effective Date: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
@@ -16,41 +16,40 @@ export default function ShippingAndDelivery() {
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.1}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Delivery Areas</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            We currently deliver to select local areas. Delivery availability will be confirmed at the time of order via WhatsApp.
+            At Ozee&apos;s, every order is freshly prepared after confirmation.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.2}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Delivery Timelines</h2>
+          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Order Timelines</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Standard delivery is within 2-4 hours of order confirmation, subject to availability and location. Custom cakes require advance notice as per the timelines communicated during ordering.
+            As mentioned in our catalog:
           </p>
+          <ul className="list-disc list-inside text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed space-y-2">
+            <li>Cupcakes, Cookies, Donuts and Teacakes: 24 - 36 hours</li>
+            <li>Cheesecakes and Yogurts: 48 - 72 hours</li>
+            <li>Celebration Cakes: Advance booking recommended</li>
+          </ul>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.3}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Delivery Charges</h2>
-          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Delivery charges vary by location and order value. Charges, if any, will be communicated before order confirmation.
-          </p>
+          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Delivery</h2>
+          <ul className="list-disc list-inside text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed space-y-2">
+            <li>Delivery is available in select areas of Bengaluru.</li>
+            <li>Delivery charges depend on the location.</li>
+            <li>Customers will receive an estimated delivery window during order confirmation.</li>
+          </ul>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.4}>
           <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Pickup</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Pickup address and timing will be shared upon order confirmation. Please collect orders within 24 hours of the scheduled pickup time.
+            Customers may also collect their orders from the pickup location at the agreed date and time.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.5}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Delays</h2>
-          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            While we strive to deliver on time, delays may occur due to traffic, weather, or unforeseen circumstances. We will notify you of any significant delays.
-          </p>
-        </StaggerFadeIn>
-
-        <StaggerFadeIn delay={0.6}>
           <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Contact</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
             For delivery queries, contact us at <a href="mailto:hello@ozees.in" className="text-[#E6C665] hover:underline">hello@ozees.in</a> or <strong className="text-[#F5EFE6]">+91 99009 51492</strong>.

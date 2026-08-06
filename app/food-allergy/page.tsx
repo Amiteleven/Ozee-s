@@ -17,40 +17,32 @@ export default function FoodAllergy() {
 
         <StaggerFadeIn delay={0.1}>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            At Ozee&apos;s, we take food allergies seriously. While we follow strict kitchen practices, cross-contamination may occur.
-          </p>
-        </StaggerFadeIn>
-
-        <StaggerFadeIn delay={0.2}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Common Allergens</h2>
-          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Our products may contain or come into contact with the following allergens:
+            Our products may contain or come into contact with:
           </p>
           <ul className="list-disc list-inside text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed space-y-2">
-            <li>Wheat / Gluten</li>
-            <li>Dairy / Milk</li>
+            <li>Milk</li>
             <li>Eggs</li>
-            <li>Nuts (almonds, hazelnuts, walnuts, etc.)</li>
+            <li>Wheat (Gluten)</li>
             <li>Soy</li>
+            <li>Tree Nuts</li>
+            <li>Peanuts</li>
             <li>Sesame</li>
           </ul>
         </StaggerFadeIn>
 
-        <StaggerFadeIn delay={0.3}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Egg and Eggless Options</h2>
+        <StaggerFadeIn delay={0.2}>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            We offer both egg and eggless variants. Please confirm your preference at the time of order. However, eggless products are prepared in the same kitchen as egg-containing products.
+            Although we take reasonable precautions, all products are prepared in the same kitchen. We cannot guarantee an allergen-free environment.
+          </p>
+        </StaggerFadeIn>
+
+        <StaggerFadeIn delay={0.3}>
+          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
+            Customers with any allergies are requested to contact us for placing order after understanding the ingredients.
           </p>
         </StaggerFadeIn>
 
         <StaggerFadeIn delay={0.4}>
-          <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Customer Responsibility</h2>
-          <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
-            Customers with severe allergies should exercise caution. Always check product descriptions and inform us of allergies before ordering.
-          </p>
-        </StaggerFadeIn>
-
-        <StaggerFadeIn delay={0.5}>
           <h2 className="font-serif text-2xl font-bold text-[#F5EFE6]">Contact</h2>
           <p className="text-[#C7B7A7] font-light text-base sm:text-lg leading-relaxed">
             For allergy-related questions, contact us at <a href="mailto:hello@ozees.in" className="text-[#E6C665] hover:underline">hello@ozees.in</a> or <strong className="text-[#F5EFE6]">+91 99009 51492</strong>.
