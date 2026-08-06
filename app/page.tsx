@@ -993,6 +993,16 @@ export default function Home() {
             </motion.div>
           </StaggerFadeIn>
 
+          <StaggerFadeIn delay={0.1}>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#8A7A6C]">
+              <a href="#privacy" className="hover:text-[#E6C665] transition-colors">Privacy Policy</a>
+              <a href="#terms" className="hover:text-[#E6C665] transition-colors">Terms and Condition</a>
+              <a href="#refund" className="hover:text-[#E6C665] transition-colors">Refund, Return and Cancellation</a>
+              <a href="#allergy" className="hover:text-[#E6C665] transition-colors">Food Alergy</a>
+              <a href="#shipping" className="hover:text-[#E6C665] transition-colors">Shipping and Delivery</a>
+            </div>
+          </StaggerFadeIn>
+
           <StaggerFadeIn delay={0.2} yOffset={20}>
             <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
               <p>© {new Date().getFullYear()} Ozee&apos;s Pâtisserie. All rights reserved.</p>
