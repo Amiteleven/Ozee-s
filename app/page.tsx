@@ -995,11 +995,11 @@ export default function Home() {
 
           <StaggerFadeIn delay={0.1}>
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#8A7A6C]">
-              <a href="#privacy" className="hover:text-[#E6C665] transition-colors">Privacy Policy</a>
-              <a href="#terms" className="hover:text-[#E6C665] transition-colors">Terms and Condition</a>
-              <a href="#refund" className="hover:text-[#E6C665] transition-colors">Refund, Return and Cancellation</a>
-              <a href="#allergy" className="hover:text-[#E6C665] transition-colors">Food Alergy</a>
-              <a href="#shipping" className="hover:text-[#E6C665] transition-colors">Shipping and Delivery</a>
+              <a href="/privacy-policy" className="hover:text-[#E6C665] transition-colors">Privacy Policy</a>
+              <a href="/terms-and-conditions" className="hover:text-[#E6C665] transition-colors">Terms and Condition</a>
+              <a href="/refund-return-cancellation" className="hover:text-[#E6C665] transition-colors">Refund, Return and Cancellation</a>
+              <a href="/food-allergy" className="hover:text-[#E6C665] transition-colors">Food Alergy</a>
+              <a href="/shipping-and-delivery" className="hover:text-[#E6C665] transition-colors">Shipping and Delivery</a>
             </div>
           </StaggerFadeIn>
 
