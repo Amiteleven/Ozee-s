@@ -1,10 +1,13 @@
 "use client";
 
+import SiteHeader from "../components/site-header";
+import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
 
 export default function RefundReturnCancellation() {
   return (
     <div className="min-h-screen bg-[#0B0806] text-[#F5EFE6] font-sans selection:bg-[#E6C665]/30">
+      <SiteHeader />
       <div className="max-w-3xl mx-auto px-6 py-24 space-y-10">
         <StaggerFadeIn>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-[#F5EFE6]">
@@ -69,6 +72,7 @@ export default function RefundReturnCancellation() {
           </p>
         </StaggerFadeIn>
       </div>
+      <SiteFooter />
     </div>
   );
 }

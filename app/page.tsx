@@ -9,6 +9,8 @@ import {
   AnimatedCounter,
   StaggerFadeIn,
 } from "./components/animations";
+import SiteHeader from "./components/site-header";
+import SiteFooter from "./components/site-footer";
 
 
 function DietaryBadge({ type }: { type: "veg" | "egg" | "both" }) {
@@ -508,50 +510,7 @@ export default function Home() {
       </div>
 
       {/* Luxury Sticky Header (Dark Obsidian Glass) */}
-      <header className="sticky top-0 z-50 bg-[#0B0806]/90 backdrop-blur-xl border-b border-[#261D16] transition-all">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          
-          {/* Brand Logo (Vibrant Metallic Golden) */}
-          <a href="#" className="flex flex-col items-center group transition-transform hover:scale-105">
-            <div className="w-11 h-11 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-2xl font-black shadow-lg shadow-[#E6C665]/30 flex items-center justify-center group-hover:rotate-6 transition-all duration-300">
-              O
-            </div>
-            <span className="font-serif text-2xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-md -mt-0.5">
-              OZEE&apos;S
-            </span>
-            <span className="text-[8px] uppercase tracking-[0.38em] text-[#E6C665] font-bold -mt-1">
-              Pâtisserie & Artisanal Bakes
-            </span>
-          </a>
-
-          <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-[0.15em] uppercase text-[#D6C7B8]">
-            <a href="#about" className="hover:text-[#E6C665] transition-colors relative py-1 group">
-              Our Story
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="#menu" className="hover:text-[#E6C665] transition-colors relative py-1 group">
-              Bake Collection
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="#ordering" className="hover:text-[#E6C665] transition-colors relative py-1 group">
-              Ordering Process
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={wa()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#25D366] hover:bg-[#20ba59] text-white px-5 py-2.5 rounded-full text-xs font-bold tracking-wider uppercase shadow-md hover:shadow-lg transition-all flex items-center gap-2"
-            >
-              <span>WhatsApp Order</span>
-            </a>
-          </div>
-
-        </div>
-      </header>
+      <SiteHeader />
 
       {/* Hero Showcase Section */}
       <section className="relative py-20 lg:py-28 overflow-hidden border-b border-[#261D16] bg-gradient-to-b from-[#090705] via-[#0F0B08] to-[#15100B]">
@@ -968,50 +927,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#050403] text-[#F5EFE6] py-16 border-t border-[#211811]">
-        <div className="max-w-7xl mx-auto px-6 text-center space-y-8">
-          
-          <StaggerFadeIn>
-            <motion.div
-              className="flex flex-col items-center group"
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.3 }}
-            >
-              <motion.div
-                whileHover={{ rotate: 10 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="w-14 h-14 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-3xl font-black shadow-xl shadow-[#E6C665]/40 flex items-center justify-center mb-1.5"
-              >
-                O
-              </motion.div>
-              <span className="font-serif text-4xl font-black tracking-[0.22em] bg-gradient-to-r from-[#FFF0B3] via-[#E6C665] to-[#D4AF37] bg-clip-text text-transparent drop-shadow-lg">
-                OZEE&apos;S
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.38em] text-[#E6C665] font-bold mt-1">
-                Crafted with Love • Made Like Home
-              </span>
-            </motion.div>
-          </StaggerFadeIn>
-
-          <StaggerFadeIn delay={0.1}>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#8A7A6C]">
-              <a href="/privacy-policy" className="hover:text-[#E6C665] transition-colors">Privacy Policy</a>
-              <a href="/terms-and-conditions" className="hover:text-[#E6C665] transition-colors">Terms and Condition</a>
-              <a href="/refund-return-cancellation" className="hover:text-[#E6C665] transition-colors">Refund, Return and Cancellation</a>
-              <a href="/food-allergy" className="hover:text-[#E6C665] transition-colors">Food Alergy</a>
-              <a href="/shipping-and-delivery" className="hover:text-[#E6C665] transition-colors">Shipping and Delivery</a>
-            </div>
-          </StaggerFadeIn>
-
-          <StaggerFadeIn delay={0.2} yOffset={20}>
-            <div className="pt-8 border-t border-[#211811] text-xs text-[#8A7A6C] flex flex-col sm:flex-row items-center justify-between gap-4">
-              <p>© {new Date().getFullYear()} Ozee&apos;s Pâtisserie. All rights reserved.</p>
-              <p>WhatsApp: +91 99009 51492 | www.ozees.in</p>
-            </div>
-          </StaggerFadeIn>
-
-        </div>
-      </footer>
+      <SiteFooter />
 
     </div>
   );
