@@ -1,8 +1,14 @@
-"use client";
-
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
+
+export const metadata = {
+  title: "Privacy Policy | Ozee's Bakery Bangalore",
+  description: "Learn how Ozee's collects, uses, and protects your personal information when you visit www.ozees.in or place an order.",
+  alternates: {
+    canonical: "https://www.ozees.in/privacy-policy",
+  },
+};
 
 export default function PrivacyPolicy() {
   return (

@@ -1,8 +1,14 @@
-"use client";
-
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
+
+export const metadata = {
+  title: "Terms and Conditions | Ozee's Bakery Bangalore",
+  description: "Read Ozee's terms and conditions for ordering homemade bakery products in Bangalore. Custom cakes, delivery, payments, and cancellation policy.",
+  alternates: {
+    canonical: "https://www.ozees.in/terms-and-conditions",
+  },
+};
 
 export default function TermsAndConditions() {
   return (

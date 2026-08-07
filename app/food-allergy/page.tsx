@@ -1,8 +1,14 @@
-"use client";
-
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
+
+export const metadata = {
+  title: "Food Allergy Disclaimer | Ozee's Bakery Bangalore",
+  description: "Important food allergy information for Ozee's bakery products. Learn about common allergens in our homemade cakes, cupcakes, cookies, and baked goods.",
+  alternates: {
+    canonical: "https://www.ozees.in/food-allergy",
+  },
+};
 
 export default function FoodAllergy() {
   return (

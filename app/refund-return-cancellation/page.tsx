@@ -1,8 +1,14 @@
-"use client";
-
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
+
+export const metadata = {
+  title: "Refund, Return and Cancellation | Ozee's Bakery Bangalore",
+  description: "Ozee's refund and cancellation policy for Bangalore bakery orders. Learn about cancellation timelines, refund eligibility, and customized cake policies.",
+  alternates: {
+    canonical: "https://www.ozees.in/refund-return-cancellation",
+  },
+};
 
 export default function RefundReturnCancellation() {
   return (

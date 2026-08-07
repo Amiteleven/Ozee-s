@@ -1,8 +1,14 @@
-"use client";
-
 import SiteHeader from "../components/site-header";
 import SiteFooter from "../components/site-footer";
 import { StaggerFadeIn } from "../components/animations";
+
+export const metadata = {
+  title: "Shipping and Delivery Policy | Ozee's Bakery Bangalore",
+  description: "Ozee's shipping and delivery policy for Bangalore. Order timelines, delivery areas, charges, and pickup information for homemade bakery products.",
+  alternates: {
+    canonical: "https://www.ozees.in/shipping-and-delivery",
+  },
+};
 
 export default function ShippingAndDelivery() {
   return (
