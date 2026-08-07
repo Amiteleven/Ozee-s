@@ -11,6 +11,7 @@ import {
 } from "./components/animations";
 import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
+import ProductJsonLd from "./components/product-json-ld";
 
 
 function DietaryBadge({ type }: { type: "veg" | "egg" | "both" }) {
@@ -89,8 +90,9 @@ function ProductCard({ item, wa, index = 0 }: { item: Product; wa: (name?: strin
           >
             <Image
               src={currentImg}
-              alt={item.name}
+              alt={`${item.name} - ${item.category} from Ozee's Bakery Bangalore`}
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="object-cover group-hover:scale-105 transition-transform duration-700"
             />
           </motion.div>
@@ -123,7 +125,7 @@ function ProductCard({ item, wa, index = 0 }: { item: Product; wa: (name?: strin
                 currentImg === imgUrl ? "border-[#E6C665] shadow-md ring-2 ring-[#E6C665]/30" : "border-[#33261C] opacity-60 hover:opacity-100"
               }`}
             >
-              <Image src={imgUrl} alt={`${item.name} photo ${idx + 1}`} fill className="object-cover" />
+              <Image src={imgUrl} alt={`${item.name} - ${item.category} view ${idx + 1}`} fill className="object-cover" />
             </motion.button>
           ))}
         </div>
@@ -615,8 +617,9 @@ export default function Home() {
               >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (23).jpeg"
-                  alt="Berry Crown Cupcakes Showcase"
+                  alt="Berry Crown Cupcakes Showcase - Ozee's Bakery Bangalore"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                   priority
                 />
@@ -633,8 +636,9 @@ export default function Home() {
               >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (14).jpeg"
-                  alt="Hazelnut Heaven Teacake"
+                  alt="Hazelnut Heaven Teacake - Ozee's Bakery Bangalore"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </motion.div>
@@ -649,8 +653,9 @@ export default function Home() {
               >
                 <Image
                   src="/images (7).jpg"
-                  alt="Biscoff Bliss Cheesecake Showcase"
+                  alt="Biscoff Bliss Cheesecake Showcase - Ozee's Bakery Bangalore"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                   priority
                 />
@@ -663,8 +668,9 @@ export default function Home() {
               >
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 4.55.09 PM (22).jpeg"
-                  alt="Blue Velvet Creamy Yogurt Showcase"
+                  alt="Blue Velvet Creamy Yogurt Showcase - Ozee's Bakery Bangalore"
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover group-hover:scale-110 transition-transform duration-700"
                 />
               </motion.div>
@@ -739,8 +745,9 @@ export default function Home() {
               <div className="relative aspect-[16/8] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-[#2B2119] group">
                 <Image
                   src="/WhatsApp Image 2026-07-31 at 5.04.43 PM (2).jpeg"
-                  alt="Ozee's Custom Cake Portfolio Showcase"
+                  alt="Ozee's Custom Cake Portfolio Showcase - Bangalore Bakery"
                   fill
+                  sizes="(max-width: 768px) 100vw, 768px"
                   className="object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <GoldShimmer />
@@ -810,6 +817,13 @@ export default function Home() {
               ))}
             </motion.div>
           </AnimatePresence>
+          <ProductJsonLd products={catalog.map(p => ({
+            name: p.name,
+            description: p.desc,
+            category: p.category,
+            diet: p.diet,
+            image: p.img,
+          }))} />
 
         </div>
       </section>

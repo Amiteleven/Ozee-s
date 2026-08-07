@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Link from "next/link";
 
 const phone = "919900951492";
 const wa = (item?: string) => {
@@ -15,7 +15,7 @@ export default function SiteHeader() {
     <header className="sticky top-0 z-50 bg-[#0B0806]/90 backdrop-blur-xl border-b border-[#261D16] transition-all">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Brand Logo (Vibrant Metallic Golden) */}
-        <a href="/" className="flex flex-col items-center group transition-transform hover:scale-105">
+        <Link href="/" className="flex flex-col items-center group transition-transform hover:scale-105">
           <div className="w-11 h-11 rounded-full border-2 border-[#E6C665] bg-gradient-to-br from-[#F7DC8D] via-[#E6C665] to-[#C49B28] text-[#0B0806] font-serif text-2xl font-black shadow-lg shadow-[#E6C665]/30 flex items-center justify-center group-hover:rotate-6 transition-all duration-300">
             O
           </div>
@@ -25,21 +25,25 @@ export default function SiteHeader() {
           <span className="text-[8px] uppercase tracking-[0.38em] text-[#E6C665] font-bold -mt-1">
             Pâtisserie & Artisanal Bakes
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden lg:flex items-center gap-8 text-xs font-semibold tracking-[0.15em] uppercase text-[#D6C7B8]">
-          <a href="/#about" className="hover:text-[#E6C665] transition-colors relative py-1 group">
+          <Link href="/#about" className="hover:text-[#E6C665] transition-colors relative py-1 group">
             Our Story
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="/#menu" className="hover:text-[#E6C665] transition-colors relative py-1 group">
+          </Link>
+          <Link href="/#menu" className="hover:text-[#E6C665] transition-colors relative py-1 group">
             Bake Collection
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="/#ordering" className="hover:text-[#E6C665] transition-colors relative py-1 group">
+          </Link>
+          <Link href="/blog" className="hover:text-[#E6C665] transition-colors relative py-1 group">
+            Blog
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
+          </Link>
+          <Link href="/#ordering" className="hover:text-[#E6C665] transition-colors relative py-1 group">
             Ordering Process
             <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#E6C665] transition-all duration-300 group-hover:w-full"></span>
-          </a>
+          </Link>
         </nav>
 
         <div className="flex items-center gap-4">
